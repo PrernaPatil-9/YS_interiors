@@ -104,6 +104,216 @@
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
   }
+
+  /* ===== MODAL / OVERLAY CARD STYLES ===== */
+  .project-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    animation: modalFadeIn 0.4s ease;
+  }
+
+  .project-modal.active {
+    display: flex;
+  }
+
+  @keyframes modalFadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .modal-content {
+    background: #fff;
+    max-width: 900px;
+    width: 100%;
+    max-height: 90vh;
+    border-radius: 12px;
+    overflow-y: auto;
+    position: relative;
+    padding: 40px 45px 45px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    font-size: 1.8rem;
+    color: #555;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-close:hover {
+    background: #f0f0f0;
+    color: #1F1F1F;
+    transform: rotate(90deg);
+  }
+
+  .modal-content .modal-badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #8B1E2D;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .modal-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: #1F1F1F;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .modal-content .modal-location {
+    color: #777;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+  }
+
+  .modal-content .modal-description {
+    color: #555;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  .modal-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .modal-gallery img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.4s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .modal-gallery img:hover {
+    transform: scale(1.03);
+  }
+
+  .modal-cta {
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid #EAEAEA;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .modal-cta .btn-modal {
+    padding: 12px 30px;
+    background: #8B1E2D;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .modal-cta .btn-modal:hover {
+    background: #6a1622;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(139,30,45,0.3);
+  }
+
+  .modal-cta .btn-modal-outline {
+    padding: 12px 30px;
+    background: transparent;
+    color: #8B1E2D;
+    border: 2px solid #8B1E2D;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .modal-cta .btn-modal-outline:hover {
+    background: #8B1E2D;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(139,30,45,0.15);
+  }
+
+  /* Modal Scrollbar */
+  .modal-content::-webkit-scrollbar {
+    width: 6px;
+  }
+  .modal-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+  .modal-content::-webkit-scrollbar-thumb {
+    background: #8B1E2D;
+    border-radius: 10px;
+  }
+
+  @media (max-width: 768px) {
+    .modal-content {
+      padding: 30px 22px 32px;
+      max-height: 95vh;
+    }
+    .modal-content h2 {
+      font-size: 1.6rem;
+    }
+    .modal-gallery {
+      grid-template-columns: 1fr 1fr;
+    }
+    .modal-gallery img {
+      height: 160px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .modal-gallery {
+      grid-template-columns: 1fr;
+    }
+    .modal-gallery img {
+      height: 200px;
+    }
+    .modal-cta {
+      flex-direction: column;
+    }
+    .modal-cta .btn-modal,
+    .modal-cta .btn-modal-outline {
+      text-align: center;
+      justify-content: center;
+    }
+  }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -261,7 +471,7 @@
           <span class="badge">Residential</span>
           <h3>Kavana Villa</h3>
           <p>Koregaon Park, Pune — full villa interior fit-out.</p>
-          <a href="contact.html" class="view-link">View Details <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="#" class="view-link" data-project="kavana">View Details <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
 
@@ -272,7 +482,7 @@
           <span class="badge">Commercial</span>
           <h3>Meridian Offices</h3>
           <p>Baner, Pune — 18,000 sq.ft corporate fit-out.</p>
-          <a href="contact.html" class="view-link">View Details <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="#" class="view-link" data-project="meridian">View Details <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
 
@@ -283,7 +493,7 @@
           <span class="badge">Civil Work</span>
           <h3>Hillcrest RCC Frame</h3>
           <p>Wagholi, Pune — structural frame for a 6-unit residence.</p>
-          <a href="contact.html" class="view-link">View Details <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="#" class="view-link" data-project="hillcrest">View Details <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
 
@@ -294,7 +504,7 @@
           <span class="badge">Renovation</span>
           <h3>Ashford Restoration</h3>
           <p>Camp, Pune — heritage facade restoration and interior upgrade.</p>
-          <a href="contact.html" class="view-link">View Details <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="#" class="view-link" data-project="ashford">View Details <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
 
@@ -305,7 +515,7 @@
           <span class="badge">Residential</span>
           <h3>Birchwood Apartment</h3>
           <p>Kothrud, Pune — modular kitchen and living space redesign.</p>
-          <a href="contact.html" class="view-link">View Details <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="#" class="view-link" data-project="birchwood">View Details <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
 
@@ -316,7 +526,7 @@
           <span class="badge">Commercial</span>
           <h3>Terra Café</h3>
           <p>FC Road, Pune — 2,200 sq.ft café interior and outdoor deck.</p>
-          <a href="contact.html" class="view-link">View Details <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="#" class="view-link" data-project="terra">View Details <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
 
@@ -327,7 +537,7 @@
           <span class="badge">Civil Work</span>
           <h3>Solstice Foundation Works</h3>
           <p>Hinjewadi, Pune — excavation and foundation for a 4-storey building.</p>
-          <a href="contact.html" class="view-link">View Details <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="#" class="view-link" data-project="solstice">View Details <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
 
@@ -338,7 +548,7 @@
           <span class="badge">Renovation</span>
           <h3>Laurel House Upgrade</h3>
           <p>Aundh, Pune — structural upgrade and full interior renovation.</p>
-          <a href="contact.html" class="view-link">View Details <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="#" class="view-link" data-project="laurel">View Details <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
 
@@ -349,7 +559,7 @@
           <span class="badge">Residential</span>
           <h3>Ivory Bungalow</h3>
           <p>NIBM, Pune — bedroom and living room interior design.</p>
-          <a href="contact.html" class="view-link">View Details <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="#" class="view-link" data-project="ivory">View Details <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
 
@@ -357,48 +567,137 @@
   </div>
 </section>
 
-<!-- ===== FOOTER ===== -->
+<!-- ===== PROJECT MODAL ===== -->
+<div id="projectModal" class="project-modal">
+  <div class="modal-content">
+    <button class="modal-close" id="modalClose">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    
+    <span class="modal-badge" id="modalBadge">Residential</span>
+    <h2 id="modalTitle">Kavana Villa</h2>
+    <p class="modal-location" id="modalLocation">📍 Koregaon Park, Pune</p>
+    <p class="modal-description" id="modalDescription">A complete interior fit-out for a luxury villa featuring modern aesthetics with warm, earthy tones. The project included custom furniture, lighting design, and premium material selection.</p>
+    
+    <div class="modal-gallery" id="modalGallery">
+      <img src="https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=800&q=80" alt="Project Image 1">
+      <img src="https://images.unsplash.com/photo-1616137466211-f939a420be84?auto=format&fit=crop&w=800&q=80" alt="Project Image 2">
+      <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80" alt="Project Image 3">
+    </div>
+
+    <div class="modal-cta">
+      <a href="contact.html" class="btn-modal">
+        <i class="fa-solid fa-envelope"></i> Get a Quote
+      </a>
+      <a href="services.html" class="btn-modal-outline">
+        <i class="fa-solid fa-arrow-right"></i> Explore Services
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== REDESIGNED FOOTER WITH ICONS ===== -->
 <footer style="background:#1F1F1F">
   <div class="max-w-7xl mx-auto px-6 lg:px-10 py-20 grid md:grid-cols-4 gap-12">
+    
+    <!-- Column 1: Brand & Social -->
     <div>
-      <a href="index.html" class="font-display text-2xl text-white">YS Interiors</a>
+      <a href="index.html" class="font-display text-2xl text-white flex items-center gap-2">
+        <i class="fa-solid fa-crown text-[#FFB900] text-xl"></i>
+        YS Interiors
+      </a>
       <p class="mt-5 text-sm leading-7" style="color:#9a9a9a">A design-and-build studio pairing structural precision with elevated interiors — from foundation to final finish.</p>
       <div class="flex gap-3 mt-6">
         <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center text-white/80 hover:text-[#1F1F1F] hover:bg-[#FFB900] border border-white/15 transition"><i class="fa-brands fa-instagram"></i></a>
         <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center text-white/80 hover:text-[#1F1F1F] hover:bg-[#FFB900] border border-white/15 transition"><i class="fa-brands fa-facebook-f"></i></a>
         <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center text-white/80 hover:text-[#1F1F1F] hover:bg-[#FFB900] border border-white/15 transition"><i class="fa-brands fa-pinterest-p"></i></a>
         <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center text-white/80 hover:text-[#1F1F1F] hover:bg-[#FFB900] border border-white/15 transition"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center text-white/80 hover:text-[#1F1F1F] hover:bg-[#FFB900] border border-white/15 transition"><i class="fa-brands fa-youtube"></i></a>
       </div>
     </div>
+
+    <!-- Column 2: Quick Links with Icons -->
     <div>
-      <h4 class="text-white font-display text-lg mb-5">Quick Links</h4>
+      <h4 class="text-white font-display text-lg mb-5 flex items-center gap-2">
+        <i class="fa-solid fa-link text-[#FFB900] text-sm"></i>
+        Quick Links
+      </h4>
       <ul class="space-y-3 text-sm" style="color:#9a9a9a">
-        <li><a href="about.html" class="hover:text-[#FFB900] transition">About Us</a></li>
-        <li><a href="services.html" class="hover:text-[#FFB900] transition">Services</a></li>
-        <li><a href="projects.html" class="hover:text-[#FFB900] transition">Projects</a></li>
-        <li><a href="contact.html" class="hover:text-[#FFB900] transition">Contact</a></li>
+          <li><a href="index.html" class="hover:text-[#FFB900] transition flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[10px] text-[#FFB900]"></i> Home</a></li>
+        <li><a href="about.html" class="hover:text-[#FFB900] transition flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[10px] text-[#FFB900]"></i> About Us</a></li>
+        <li><a href="services.html" class="hover:text-[#FFB900] transition flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[10px] text-[#FFB900]"></i> Services</a></li>
+        <li><a href="projects.html" class="hover:text-[#FFB900] transition flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[10px] text-[#FFB900]"></i> Projects</a></li>
+        <li><a href="contact.html" class="hover:text-[#FFB900] transition flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[10px] text-[#FFB900]"></i> Contact</a></li>
       </ul>
     </div>
+
+    <!-- Column 3: Services with Icons -->
     <div>
-      <h4 class="text-white font-display text-lg mb-5">Services</h4>
+      <h4 class="text-white font-display text-lg mb-5 flex items-center gap-2">
+        <i class="fa-solid fa-tools text-[#FFB900] text-sm"></i>
+        Services
+      </h4>
       <ul class="space-y-3 text-sm" style="color:#9a9a9a">
-        <li><a href="services.html#designing" class="hover:text-[#FFB900] transition">Designing</a></li>
-        <li><a href="services.html#construction" class="hover:text-[#FFB900] transition">Construction</a></li>
-        <li><a href="services.html#pre-construction" class="hover:text-[#FFB900] transition">Pre-Construction</a></li>
-        <li><a href="services.html#renovation" class="hover:text-[#FFB900] transition">Renovation</a></li>
-        <li><a href="services.html#maintenance" class="hover:text-[#FFB900] transition">Maintenance</a></li>
+        <li><a href="services.html" class="hover:text-[#FFB900] transition flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[10px] text-[#FFB900]"></i> Designing</a></li>
+        <li><a href="services.html" class="hover:text-[#FFB900] transition flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[10px] text-[#FFB900]"></i> Renovation</a></li>
+        <li><a href="services.html" class="hover:text-[#FFB900] transition flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[10px] text-[#FFB900]"></i> Maintencance</a></li>
+        <li><a href="services.html" class="hover:text-[#FFB900] transition flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[10px] text-[#FFB900]"></i> Construction</a></li>
+        <li><a href="services.html" class="hover:text-[#FFB900] transition flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[10px] text-[#FFB900]"></i> Pre Construction</a></li>
       </ul>
     </div>
+
+    <!-- Column 4: Contact with Icons (Enhanced) -->
     <div>
-      <h4 class="text-white font-display text-lg mb-5">Contact</h4>
-      <ul class="space-y-3 text-sm" style="color:#9a9a9a">
-        <li class="flex gap-3"><i class="fa-solid fa-location-dot mt-1 text-[#FFB900]"></i>Madhuvanti C-402, Nanded City, Pune - 411041</li>
-        <li class="flex gap-3"><i class="fa-solid fa-phone mt-1 text-[#FFB900]"></i>+91 9403598189</li>
-        <li class="flex gap-3"><i class="fa-solid fa-envelope mt-1 text-[#FFB900]"></i>Ysinteriors.pune@gmail.com</li>
+      <h4 class="text-white font-display text-lg mb-5 flex items-center gap-2">
+        <i class="fa-solid fa-address-card text-[#FFB900] text-sm"></i>
+        Contact Info
+      </h4>
+      <ul class="space-y-4 text-sm" style="color:#9a9a9a">
+        <li class="flex gap-3 items-start">
+          <i class="fa-solid fa-location-dot mt-1 text-[#FFB900] text-base"></i>
+          <span>Madhuvanti C-402, Nanded City, Pune - 411041</span>
+        </li>
+        <li class="flex gap-3 items-center">
+          <i class="fa-solid fa-phone text-[#FFB900] text-base"></i>
+          <a href="tel:+919403598189" class="hover:text-[#FFB900] transition">+91 94035 98189</a>
+        </li>
+        <li class="flex gap-3 items-center">
+          <i class="fa-solid fa-envelope text-[#FFB900] text-base"></i>
+          <a href="mailto:Ysinteriors.pune@gmail.com" class="hover:text-[#FFB900] transition">Ysinteriors.pune@gmail.com</a>
+        </li>
+        <li class="flex gap-3 items-center">
+          <i class="fa-solid fa-clock text-[#FFB900] text-base"></i>
+          <span>Mon-Sat: 9:00 AM - 7:00 PM</span>
+        </li>
+        <li class="flex gap-3 items-center">
+          <i class="fa-solid fa-whatsapp text-[#FFB900] text-base"></i>
+          <a href="https://wa.me/919403598189" class="hover:text-[#FFB900] transition">Chat on WhatsApp</a>
+        </li>
       </ul>
+    </div>
+
+  </div>
+
+  <!-- Bottom Bar with Icons -->
+  <div class="border-t border-white/10 py-6">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 flex flex-col md:flex-row justify-between items-center gap-4">
+      <p class="text-xs" style="color:#7d7d7d">
+        <i class="fa-regular fa-copyright text-[#FFB900] mr-1"></i>
+        2026 YS Interior Design-Build Studio. All rights reserved.
+      </p>
+      <div class="flex gap-6 text-xs" style="color:#7d7d7d">
+        <a href="#" class="hover:text-[#FFB900] transition flex items-center gap-1">
+          <i class="fa-solid fa-shield-alt text-[#FFB900] text-[10px]"></i> Privacy Policy
+        </a>
+        <a href="#" class="hover:text-[#FFB900] transition flex items-center gap-1">
+          <i class="fa-solid fa-file-contract text-[#FFB900] text-[10px]"></i> Terms of Service
+        </a>
+        <a href="#" class="hover:text-[#FFB900] transition flex items-center gap-1">
+          <i class="fa-solid fa-sitemap text-[#FFB900] text-[10px]"></i> Sitemap
+        </a>
+      </div>
     </div>
   </div>
-  <div class="border-t border-white/10 py-6 text-center text-xs" style="color:#7d7d7d">© 2026 YS Interior Design-Build Studio. All rights reserved.</div>
 </footer>
 
 <a id="whatsapp-float" href="https://wa.me/919822045671" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
@@ -433,6 +732,157 @@
     // Initialize: show all projects
     projectItems.forEach(item => {
       item.style.display = 'block';
+    });
+
+    // ===== MODAL FUNCTIONALITY =====
+    const modal = document.getElementById('projectModal');
+    const modalClose = document.getElementById('modalClose');
+    const viewLinks = document.querySelectorAll('.view-link');
+
+    // Project data
+    const projectData = {
+      kavana: {
+        badge: 'Residential',
+        title: 'Kavana Villa',
+        location: '📍 Koregaon Park, Pune',
+        description: 'A complete interior fit-out for a luxury villa featuring modern aesthetics with warm, earthy tones. The project included custom furniture, lighting design, and premium material selection.',
+        images: [
+          'https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1616137466211-f939a420be84?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80'
+        ]
+      },
+      meridian: {
+        badge: 'Commercial',
+        title: 'Meridian Offices',
+        location: '📍 Baner, Pune',
+        description: 'A 18,000 sq.ft corporate fit-out featuring open-plan workspaces, collaborative zones, and executive offices with premium finishes and modern technology integration.',
+        images: [
+          'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=800&q=80'
+        ]
+      },
+      hillcrest: {
+        badge: 'Civil Work',
+        title: 'Hillcrest RCC Frame',
+        location: '📍 Wagholi, Pune',
+        description: 'Structural RCC frame construction for a 6-unit residential building, including foundation, columns, beams, and slab work with high-quality concrete and reinforcement.',
+        images: [
+          'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=800&q=80'
+        ]
+      },
+      ashford: {
+        badge: 'Renovation',
+        title: 'Ashford Restoration',
+        location: '📍 Camp, Pune',
+        description: 'Heritage facade restoration and complete interior upgrade, preserving historical elements while introducing modern amenities and contemporary design sensibilities.',
+        images: [
+          'https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1600166898405-da9535204843?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=800&q=80'
+        ]
+      },
+      birchwood: {
+        badge: 'Residential',
+        title: 'Birchwood Apartment',
+        location: '📍 Kothrud, Pune',
+        description: 'Modular kitchen and living space redesign featuring smart storage solutions, premium finishes, and an open-plan layout that maximizes natural light and space.',
+        images: [
+          'https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=800&q=80'
+        ]
+      },
+      terra: {
+        badge: 'Commercial',
+        title: 'Terra Café',
+        location: '📍 FC Road, Pune',
+        description: '2,200 sq.ft café interior and outdoor deck design featuring a biophilic theme, custom furniture, and a warm, inviting atmosphere perfect for the urban coffee culture.',
+        images: [
+          'https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80'
+        ]
+      },
+      solstice: {
+        badge: 'Civil Work',
+        title: 'Solstice Foundation Works',
+        location: '📍 Hinjewadi, Pune',
+        description: 'Comprehensive excavation and foundation work for a 4-storey commercial building, including soil testing, deep foundation design, and high-strength concrete work.',
+        images: [
+          'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=800&q=80'
+        ]
+      },
+      laurel: {
+        badge: 'Renovation',
+        title: 'Laurel House Upgrade',
+        location: '📍 Aundh, Pune',
+        description: 'Structural upgrade and full interior renovation including RCC strengthening, modern finishes, and complete redesign of living spaces to meet contemporary standards.',
+        images: [
+          'https://images.unsplash.com/photo-1600166898405-da9535204843?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=800&q=80'
+        ]
+      },
+      ivory: {
+        badge: 'Residential',
+        title: 'Ivory Bungalow',
+        location: '📍 NIBM, Pune',
+        description: 'Bedroom and living room interior design featuring elegant finishes, custom furniture, and a sophisticated color palette that creates a timeless, luxurious atmosphere.',
+        images: [
+          'https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80'
+        ]
+      }
+    };
+
+    // Open modal
+    viewLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const projectKey = this.getAttribute('data-project');
+        const data = projectData[projectKey];
+        
+        if (data) {
+          document.getElementById('modalBadge').textContent = data.badge;
+          document.getElementById('modalTitle').textContent = data.title;
+          document.getElementById('modalLocation').textContent = data.location;
+          document.getElementById('modalDescription').textContent = data.description;
+          
+          const gallery = document.getElementById('modalGallery');
+          gallery.innerHTML = '';
+          data.images.forEach(src => {
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = data.title;
+            img.loading = 'lazy';
+            gallery.appendChild(img);
+          });
+          
+          modal.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+      });
+    });
+
+    // Close modal
+    function closeModal() {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeModal();
     });
   });
 </script>
