@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Projects — YS Interiors &amp; Civil Works</title>
+<title>Projects — Strata &amp; Stone</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -18,27 +18,104 @@
 <style>
   .filter-btn { font-size:.8rem; letter-spacing:.05em; text-transform:uppercase; padding:10px 22px; border:1px solid #EAEAEA; border-radius:2px; color:#555555; transition:all .3s ease; }
   .filter-btn.active-filter, .filter-btn:hover { background:#8B1E2D; border-color:#8B1E2D; color:#fff; }
+
+  /* Project card - overlay always visible on image */
+  .project-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    background: #1F1F1F;
+    cursor: pointer;
+  }
+  .project-item img {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+  .project-item:hover img {
+    transform: scale(1.05);
+  }
+  
+  /* Overlay - always visible on the image */
+  .project-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 30px 28px 28px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.85) 30%, rgba(0,0,0,0.95));
+    color: #fff;
+    pointer-events: none;
+    transition: all 0.4s ease;
+  }
+  .project-item:hover .project-overlay {
+    padding-bottom: 32px;
+    background: linear-gradient(transparent, rgba(139,30,45,0.85) 30%, rgba(139,30,45,0.95));
+  }
+  .project-overlay .badge {
+    display: inline-block;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #FFB900;
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+  .project-overlay h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    margin-bottom: 2px;
+    color: #fff;
+    font-weight: 600;
+  }
+  .project-overlay p {
+    color: rgba(255,255,255,0.8);
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+  .project-overlay .view-link {
+    color: #FFB900;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    pointer-events: auto;
+    transition: all 0.3s;
+    letter-spacing: 0.03em;
+  }
+  .project-overlay .view-link:hover {
+    color: #fff;
+    gap: 10px;
+  }
+  .project-overlay .view-link i {
+    font-size: 0.7rem;
+    transition: transform 0.3s;
+  }
+  .project-overlay .view-link:hover i {
+    transform: translateX(4px);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
 <body class="font-body">
-<!-- <div id="preloader"><div class="loader-mark">S&amp;S<div class="loader-line"></div></div></div> -->
 
 <!-- ===== HEADER ===== -->
 <header id="site-header">
   <div class="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between">
-
-    <!-- Logo -->
     <a href="index.html" class="flex items-center">
-      <img
-        src="/images/logo.PNG"
-        alt="YS Interiors"
-        class="h-14 md:h-16 lg:h-18 w-auto object-contain"
-      >
+      <img src="images/logo.png" alt="Strata & Stone Logo" class="h-14 md:h-16 lg:h-18 w-auto object-contain">
     </a>
-
-    <!-- Desktop Navigation -->
     <nav class="hidden lg:flex items-center gap-10">
       <a href="index.html" class="nav-link">Home</a>
       <a href="about.html" class="nav-link">About</a>
@@ -46,17 +123,12 @@
       <a href="projects.html" class="nav-link">Projects</a>
       <a href="contact.html" class="nav-link">Contact</a>
     </nav>
-
-    <!-- CTA Button -->
     <div class="hidden lg:block">
       <a href="contact.html" class="btn btn-primary">Get a Quote</a>
     </div>
-
-    <!-- Mobile Menu Button -->
     <button id="menu-toggle" class="lg:hidden text-white text-2xl">
       <i class="fa-solid fa-bars"></i>
     </button>
-
   </div>
 </header>
 
@@ -65,28 +137,19 @@
   <button id="menu-close" class="absolute top-8 right-8 text-white text-3xl">
     <i class="fa-solid fa-xmark"></i>
   </button>
-
   <div class="h-full flex flex-col items-center justify-center gap-8">
-
-    <!-- Mobile Logo -->
     <a href="index.html" class="mb-6">
-      <img
-        src="/images/logo.PNG"
-        alt="YS Interiors"
-        class="h-16 w-auto object-contain"
-      >
+      <img src="images/logo.png" alt="Strata & Stone Logo" class="h-16 w-auto object-contain">
     </a>
-
     <a href="index.html" class="nav-link font-display text-3xl text-white lg:text-gray-800">Home</a>
-<a href="about.html" class="nav-link font-display text-3xl text-white lg:text-gray-800">About</a>
-<a href="services.html" class="nav-link font-display text-3xl text-white lg:text-gray-800">Services</a>
-<a href="projects.html" class="nav-link font-display text-3xl text-white lg:text-gray-800">Projects</a>
-<a href="contact.html" class="nav-link font-display text-3xl text-white lg:text-gray-800">Contact</a>
-
-
+    <a href="about.html" class="nav-link font-display text-3xl text-white lg:text-gray-800">About</a>
+    <a href="services.html" class="nav-link font-display text-3xl text-white lg:text-gray-800">Services</a>
+    <a href="projects.html" class="nav-link font-display text-3xl text-white lg:text-gray-800">Projects</a>
+    <a href="contact.html" class="nav-link font-display text-3xl text-white lg:text-gray-800">Contact</a>
   </div>
 </div>
 
+<!-- ===== BANNER ===== -->
 <section class="page-banner bg-cover bg-center" style="background-image:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=80')">
   <div class="container max-w-7xl mx-auto px-6 lg:px-10 text-center">
     <p class="dim-line justify-center mb-5 text-white/80"><span class="dim-num">—</span> Our Portfolio</p>
@@ -94,6 +157,7 @@
   </div>
 </section>
 
+<!-- ===== PROJECTS ===== -->
 <section class="py-24 bg-white">
   <div class="max-w-7xl mx-auto px-6 lg:px-10">
     <div class="flex flex-wrap justify-center gap-3 mb-16 section-fade">
@@ -106,93 +170,102 @@
 
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-      <div class="project-item card-project" data-category="residential">
-        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" class="w-full h-96 object-cover" alt="Kavana Villa">
-        <div class="overlay">
-          <span class="text-primary text-xs uppercase tracking-widest mb-2">Residential</span>
-          <h3 class="font-display text-white text-2xl mb-1">Kavana Villa</h3>
-          <p class="text-white/70 text-sm mb-4">Koregaon Park, Pune — full villa interior fit-out.</p>
-          <a href="contact.html" class="text-white text-sm font-semibold">View Details <i class="fa-solid fa-arrow-right text-xs"></i></a>
+      <!-- Project 1 -->
+      <div class="project-item" data-category="residential">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="Kavana Villa">
+        <div class="project-overlay">
+          <span class="badge">Residential</span>
+          <h3>Kavana Villa</h3>
+          <p>Koregaon Park, Pune — full villa interior fit-out.</p>
+          <a href="contact.html" class="view-link">View Details <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
 
-      <div class="project-item card-project" data-category="commercial">
-        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80" class="w-full h-96 object-cover" alt="Meridian Offices">
-        <div class="overlay">
-          <span class="text-primary text-xs uppercase tracking-widest mb-2">Commercial</span>
-          <h3 class="font-display text-white text-2xl mb-1">Meridian Offices</h3>
-          <p class="text-white/70 text-sm mb-4">Baner, Pune — 18,000 sq.ft corporate fit-out.</p>
-          <a href="contact.html" class="text-white text-sm font-semibold">View Details <i class="fa-solid fa-arrow-right text-xs"></i></a>
+      <!-- Project 2 -->
+      <div class="project-item" data-category="commercial">
+        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80" alt="Meridian Offices">
+        <div class="project-overlay">
+          <span class="badge">Commercial</span>
+          <h3>Meridian Offices</h3>
+          <p>Baner, Pune — 18,000 sq.ft corporate fit-out.</p>
+          <a href="contact.html" class="view-link">View Details <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
 
-      <div class="project-item card-project" data-category="civil">
-        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80" class="w-full h-96 object-cover" alt="Hillcrest RCC Frame">
-        <div class="overlay">
-          <span class="text-primary text-xs uppercase tracking-widest mb-2">Civil Work</span>
-          <h3 class="font-display text-white text-2xl mb-1">Hillcrest RCC Frame</h3>
-          <p class="text-white/70 text-sm mb-4">Wagholi, Pune — structural frame for a 6-unit residence.</p>
-          <a href="contact.html" class="text-white text-sm font-semibold">View Details <i class="fa-solid fa-arrow-right text-xs"></i></a>
+      <!-- Project 3 -->
+      <div class="project-item" data-category="civil">
+        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80" alt="Hillcrest RCC Frame">
+        <div class="project-overlay">
+          <span class="badge">Civil Work</span>
+          <h3>Hillcrest RCC Frame</h3>
+          <p>Wagholi, Pune — structural frame for a 6-unit residence.</p>
+          <a href="contact.html" class="view-link">View Details <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
 
-      <div class="project-item card-project" data-category="renovation">
-        <img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=800&q=80" class="w-full h-96 object-cover" alt="Ashford Restoration">
-        <div class="overlay">
-          <span class="text-primary text-xs uppercase tracking-widest mb-2">Renovation</span>
-          <h3 class="font-display text-white text-2xl mb-1">Ashford Restoration</h3>
-          <p class="text-white/70 text-sm mb-4">Camp, Pune — heritage facade restoration and interior upgrade.</p>
-          <a href="contact.html" class="text-white text-sm font-semibold">View Details <i class="fa-solid fa-arrow-right text-xs"></i></a>
+      <!-- Project 4 -->
+      <div class="project-item" data-category="renovation">
+        <img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=800&q=80" alt="Ashford Restoration">
+        <div class="project-overlay">
+          <span class="badge">Renovation</span>
+          <h3>Ashford Restoration</h3>
+          <p>Camp, Pune — heritage facade restoration and interior upgrade.</p>
+          <a href="contact.html" class="view-link">View Details <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
 
-      <div class="project-item card-project" data-category="residential">
-        <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=800&q=80" class="w-full h-96 object-cover" alt="Birchwood Apartment">
-        <div class="overlay">
-          <span class="text-primary text-xs uppercase tracking-widest mb-2">Residential</span>
-          <h3 class="font-display text-white text-2xl mb-1">Birchwood Apartment</h3>
-          <p class="text-white/70 text-sm mb-4">Kothrud, Pune — modular kitchen and living space redesign.</p>
-          <a href="contact.html" class="text-white text-sm font-semibold">View Details <i class="fa-solid fa-arrow-right text-xs"></i></a>
+      <!-- Project 5 -->
+      <div class="project-item" data-category="residential">
+        <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=800&q=80" alt="Birchwood Apartment">
+        <div class="project-overlay">
+          <span class="badge">Residential</span>
+          <h3>Birchwood Apartment</h3>
+          <p>Kothrud, Pune — modular kitchen and living space redesign.</p>
+          <a href="contact.html" class="view-link">View Details <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
 
-      <div class="project-item card-project" data-category="commercial">
-        <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=800&q=80" class="w-full h-96 object-cover" alt="Terra Café">
-        <div class="overlay">
-          <span class="text-primary text-xs uppercase tracking-widest mb-2">Commercial</span>
-          <h3 class="font-display text-white text-2xl mb-1">Terra Café</h3>
-          <p class="text-white/70 text-sm mb-4">FC Road, Pune — 2,200 sq.ft café interior and outdoor deck.</p>
-          <a href="contact.html" class="text-white text-sm font-semibold">View Details <i class="fa-solid fa-arrow-right text-xs"></i></a>
+      <!-- Project 6 -->
+      <div class="project-item" data-category="commercial">
+        <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=800&q=80" alt="Terra Café">
+        <div class="project-overlay">
+          <span class="badge">Commercial</span>
+          <h3>Terra Café</h3>
+          <p>FC Road, Pune — 2,200 sq.ft café interior and outdoor deck.</p>
+          <a href="contact.html" class="view-link">View Details <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
 
-      <div class="project-item card-project" data-category="civil">
-        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80" class="w-full h-96 object-cover" alt="Solstice Foundation Works">
-        <div class="overlay">
-          <span class="text-primary text-xs uppercase tracking-widest mb-2">Civil Work</span>
-          <h3 class="font-display text-white text-2xl mb-1">Solstice Foundation Works</h3>
-          <p class="text-white/70 text-sm mb-4">Hinjewadi, Pune — excavation and foundation for a 4-storey building.</p>
-          <a href="contact.html" class="text-white text-sm font-semibold">View Details <i class="fa-solid fa-arrow-right text-xs"></i></a>
+      <!-- Project 7 -->
+      <div class="project-item" data-category="civil">
+        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80" alt="Solstice Foundation Works">
+        <div class="project-overlay">
+          <span class="badge">Civil Work</span>
+          <h3>Solstice Foundation Works</h3>
+          <p>Hinjewadi, Pune — excavation and foundation for a 4-storey building.</p>
+          <a href="contact.html" class="view-link">View Details <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
 
-      <div class="project-item card-project" data-category="renovation">
-        <img src="https://images.unsplash.com/photo-1600166898405-da9535204843?auto=format&fit=crop&w=800&q=80" class="w-full h-96 object-cover" alt="Laurel House Upgrade">
-        <div class="overlay">
-          <span class="text-primary text-xs uppercase tracking-widest mb-2">Renovation</span>
-          <h3 class="font-display text-white text-2xl mb-1">Laurel House Upgrade</h3>
-          <p class="text-white/70 text-sm mb-4">Aundh, Pune — structural upgrade and full interior renovation.</p>
-          <a href="contact.html" class="text-white text-sm font-semibold">View Details <i class="fa-solid fa-arrow-right text-xs"></i></a>
+      <!-- Project 8 -->
+      <div class="project-item" data-category="renovation">
+        <img src="https://images.unsplash.com/photo-1600166898405-da9535204843?auto=format&fit=crop&w=800&q=80" alt="Laurel House Upgrade">
+        <div class="project-overlay">
+          <span class="badge">Renovation</span>
+          <h3>Laurel House Upgrade</h3>
+          <p>Aundh, Pune — structural upgrade and full interior renovation.</p>
+          <a href="contact.html" class="view-link">View Details <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
 
-      <div class="project-item card-project" data-category="residential">
-        <img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=800&q=80" class="w-full h-96 object-cover" alt="Ivory Bungalow">
-        <div class="overlay">
-          <span class="text-primary text-xs uppercase tracking-widest mb-2">Residential</span>
-          <h3 class="font-display text-white text-2xl mb-1">Ivory Bungalow</h3>
-          <p class="text-white/70 text-sm mb-4">NIBM, Pune — bedroom and living room interior design.</p>
-          <a href="contact.html" class="text-white text-sm font-semibold">View Details <i class="fa-solid fa-arrow-right text-xs"></i></a>
+      <!-- Project 9 -->
+      <div class="project-item" data-category="residential">
+        <img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=800&q=80" alt="Ivory Bungalow">
+        <div class="project-overlay">
+          <span class="badge">Residential</span>
+          <h3>Ivory Bungalow</h3>
+          <p>NIBM, Pune — bedroom and living room interior design.</p>
+          <a href="contact.html" class="view-link">View Details <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
 
@@ -200,118 +273,48 @@
   </div>
 </section>
 
-<!-- <section class="relative py-28">
-  <div class="absolute inset-0 bg-cover bg-center" style="background-image:url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1800&q=80')"></div>
-  <div class="absolute inset-0" style="background:rgba(139,30,45,.88)"></div>
-  <div class="relative z-10 max-w-4xl mx-auto px-6 text-center section-fade">
-    <h2 class="font-display text-4xl md:text-5xl text-white mb-6">See your project on this list.</h2>
-    <p class="text-white/80 text-lg mb-10 max-w-xl mx-auto">Share your site or brief and we'll walk you through what's possible.</p>
-    <a href="contact.html" class="btn btn-primary">Start a Conversation</a>
-  </div>
-</section> -->
-
-<!-- ===== REDESIGNED FOOTER WITH ICONS ===== -->
+<!-- ===== FOOTER ===== -->
 <footer style="background:#1F1F1F">
   <div class="max-w-7xl mx-auto px-6 lg:px-10 py-20 grid md:grid-cols-4 gap-12">
-    
-    <!-- Column 1: Brand & Social -->
     <div>
-      <a href="index.html" class="font-display text-2xl text-white flex items-center gap-2">
-        <i class="fa-solid fa-crown text-[#FFB900] text-xl"></i>
-        YS Interiors
-      </a>
+      <a href="index.html" class="font-display text-2xl text-white">YS Interiors</a>
       <p class="mt-5 text-sm leading-7" style="color:#9a9a9a">A design-and-build studio pairing structural precision with elevated interiors — from foundation to final finish.</p>
       <div class="flex gap-3 mt-6">
         <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center text-white/80 hover:text-[#1F1F1F] hover:bg-[#FFB900] border border-white/15 transition"><i class="fa-brands fa-instagram"></i></a>
         <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center text-white/80 hover:text-[#1F1F1F] hover:bg-[#FFB900] border border-white/15 transition"><i class="fa-brands fa-facebook-f"></i></a>
         <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center text-white/80 hover:text-[#1F1F1F] hover:bg-[#FFB900] border border-white/15 transition"><i class="fa-brands fa-pinterest-p"></i></a>
         <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center text-white/80 hover:text-[#1F1F1F] hover:bg-[#FFB900] border border-white/15 transition"><i class="fa-brands fa-linkedin-in"></i></a>
-        <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center text-white/80 hover:text-[#1F1F1F] hover:bg-[#FFB900] border border-white/15 transition"><i class="fa-brands fa-youtube"></i></a>
       </div>
     </div>
-
-    <!-- Column 2: Quick Links with Icons -->
     <div>
-      <h4 class="text-white font-display text-lg mb-5 flex items-center gap-2">
-        <i class="fa-solid fa-link text-[#FFB900] text-sm"></i>
-        Quick Links
-      </h4>
+      <h4 class="text-white font-display text-lg mb-5">Quick Links</h4>
       <ul class="space-y-3 text-sm" style="color:#9a9a9a">
-          <li><a href="index.html" class="hover:text-[#FFB900] transition flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[10px] text-[#FFB900]"></i> Home</a></li>
-        <li><a href="about.html" class="hover:text-[#FFB900] transition flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[10px] text-[#FFB900]"></i> About Us</a></li>
-        <li><a href="services.html" class="hover:text-[#FFB900] transition flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[10px] text-[#FFB900]"></i> Services</a></li>
-        <li><a href="projects.html" class="hover:text-[#FFB900] transition flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[10px] text-[#FFB900]"></i> Projects</a></li>
-        <li><a href="contact.html" class="hover:text-[#FFB900] transition flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[10px] text-[#FFB900]"></i> Contact</a></li>
+        <li><a href="about.html" class="hover:text-[#FFB900] transition">About Us</a></li>
+        <li><a href="services.html" class="hover:text-[#FFB900] transition">Services</a></li>
+        <li><a href="projects.html" class="hover:text-[#FFB900] transition">Projects</a></li>
+        <li><a href="contact.html" class="hover:text-[#FFB900] transition">Contact</a></li>
       </ul>
     </div>
-
-    <!-- Column 3: Services with Icons -->
     <div>
-      <h4 class="text-white font-display text-lg mb-5 flex items-center gap-2">
-        <i class="fa-solid fa-tools text-[#FFB900] text-sm"></i>
-        Services
-      </h4>
+      <h4 class="text-white font-display text-lg mb-5">Services</h4>
       <ul class="space-y-3 text-sm" style="color:#9a9a9a">
-        <li><a href="services.html" class="hover:text-[#FFB900] transition flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[10px] text-[#FFB900]"></i> Designing</a></li>
-        <li><a href="services.html" class="hover:text-[#FFB900] transition flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[10px] text-[#FFB900]"></i> Renovation</a></li>
-        <li><a href="services.html" class="hover:text-[#FFB900] transition flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[10px] text-[#FFB900]"></i> Maintencance</a></li>
-        <li><a href="services.html" class="hover:text-[#FFB900] transition flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[10px] text-[#FFB900]"></i> Construction</a></li>
-        <li><a href="services.html" class="hover:text-[#FFB900] transition flex items-center gap-2"><i class="fa-solid fa-chevron-right text-[10px] text-[#FFB900]"></i> Pre Construction</a></li>
+        <li><a href="services.html#designing" class="hover:text-[#FFB900] transition">Designing</a></li>
+        <li><a href="services.html#construction" class="hover:text-[#FFB900] transition">Construction</a></li>
+        <li><a href="services.html#pre-construction" class="hover:text-[#FFB900] transition">Pre-Construction</a></li>
+        <li><a href="services.html#renovation" class="hover:text-[#FFB900] transition">Renovation</a></li>
+        <li><a href="services.html#maintenance" class="hover:text-[#FFB900] transition">Maintenance</a></li>
       </ul>
     </div>
-
-    <!-- Column 4: Contact with Icons (Enhanced) -->
     <div>
-      <h4 class="text-white font-display text-lg mb-5 flex items-center gap-2">
-        <i class="fa-solid fa-address-card text-[#FFB900] text-sm"></i>
-        Contact Info
-      </h4>
-      <ul class="space-y-4 text-sm" style="color:#9a9a9a">
-        <li class="flex gap-3 items-start">
-          <i class="fa-solid fa-location-dot mt-1 text-[#FFB900] text-base"></i>
-          <span>Madhuvanti C-402, Nanded City, Pune - 411041</span>
-        </li>
-        <li class="flex gap-3 items-center">
-          <i class="fa-solid fa-phone text-[#FFB900] text-base"></i>
-          <a href="tel:+919403598189" class="hover:text-[#FFB900] transition">+91 94035 98189</a>
-        </li>
-        <li class="flex gap-3 items-center">
-          <i class="fa-solid fa-envelope text-[#FFB900] text-base"></i>
-          <a href="mailto:Ysinteriors.pune@gmail.com" class="hover:text-[#FFB900] transition">Ysinteriors.pune@gmail.com</a>
-        </li>
-        <li class="flex gap-3 items-center">
-          <i class="fa-solid fa-clock text-[#FFB900] text-base"></i>
-          <span>Mon-Sat: 9:00 AM - 7:00 PM</span>
-        </li>
-        <li class="flex gap-3 items-center">
-          <i class="fa-solid fa-whatsapp text-[#FFB900] text-base"></i>
-          <a href="https://wa.me/919403598189" class="hover:text-[#FFB900] transition">Chat on WhatsApp</a>
-        </li>
+      <h4 class="text-white font-display text-lg mb-5">Contact</h4>
+      <ul class="space-y-3 text-sm" style="color:#9a9a9a">
+        <li class="flex gap-3"><i class="fa-solid fa-location-dot mt-1 text-[#FFB900]"></i>Madhuvanti C-402, Nanded City, Pune - 411041</li>
+        <li class="flex gap-3"><i class="fa-solid fa-phone mt-1 text-[#FFB900]"></i>+91 9403598189</li>
+        <li class="flex gap-3"><i class="fa-solid fa-envelope mt-1 text-[#FFB900]"></i>Ysinteriors.pune@gmail.com</li>
       </ul>
-    </div>
-
-  </div>
-
-  <!-- Bottom Bar with Icons -->
-  <div class="border-t border-white/10 py-6">
-    <div class="max-w-7xl mx-auto px-6 lg:px-10 flex flex-col md:flex-row justify-between items-center gap-4">
-      <p class="text-xs" style="color:#7d7d7d">
-        <i class="fa-regular fa-copyright text-[#FFB900] mr-1"></i>
-        2026 YS Interior Design-Build Studio. All rights reserved.
-      </p>
-      <div class="flex gap-6 text-xs" style="color:#7d7d7d">
-        <a href="#" class="hover:text-[#FFB900] transition flex items-center gap-1">
-          <i class="fa-solid fa-shield-alt text-[#FFB900] text-[10px]"></i> Privacy Policy
-        </a>
-        <a href="#" class="hover:text-[#FFB900] transition flex items-center gap-1">
-          <i class="fa-solid fa-file-contract text-[#FFB900] text-[10px]"></i> Terms of Service
-        </a>
-        <a href="#" class="hover:text-[#FFB900] transition flex items-center gap-1">
-          <i class="fa-solid fa-sitemap text-[#FFB900] text-[10px]"></i> Sitemap
-        </a>
-      </div>
     </div>
   </div>
+  <div class="border-t border-white/10 py-6 text-center text-xs" style="color:#7d7d7d">© 2026 YS Interior Design-Build Studio. All rights reserved.</div>
 </footer>
 
 <a id="whatsapp-float" href="https://wa.me/919822045671" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
@@ -321,59 +324,33 @@
 <script src="js/animation.js"></script>
 <script src="js/projects.js"></script>
 <script>
-    // Filter functionality for projects
-document.addEventListener('DOMContentLoaded', function() {
+  // Filter functionality for projects
+  document.addEventListener('DOMContentLoaded', function() {
     const filterButtons = document.querySelectorAll('.filter-btn');
     const projectItems = document.querySelectorAll('.project-item');
 
-    // Add click event to each filter button
     filterButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            // Remove active class from all buttons
-            filterButtons.forEach(btn => btn.classList.remove('active-filter'));
-            
-            // Add active class to clicked button
-            this.classList.add('active-filter');
-            
-            // Get the filter value
-            const filterValue = this.getAttribute('data-filter');
-            
-            // Filter the projects
-            projectItems.forEach(item => {
-                const category = item.getAttribute('data-category');
-                
-                if (filterValue === 'all' || category === filterValue) {
-                    item.style.display = 'block';
-                    // Add a subtle animation
-                    item.style.animation = 'fadeIn 0.5s ease';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
+      button.addEventListener('click', function() {
+        filterButtons.forEach(btn => btn.classList.remove('active-filter'));
+        this.classList.add('active-filter');
+        const filterValue = this.getAttribute('data-filter');
+        projectItems.forEach(item => {
+          const category = item.getAttribute('data-category');
+          if (filterValue === 'all' || category === filterValue) {
+            item.style.display = 'block';
+            item.style.animation = 'fadeIn 0.5s ease';
+          } else {
+            item.style.display = 'none';
+          }
         });
+      });
     });
-
-    // Add fadeIn animation
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    `;
-    document.head.appendChild(style);
 
     // Initialize: show all projects
     projectItems.forEach(item => {
-        item.style.display = 'block';
+      item.style.display = 'block';
     });
-});
+  });
 </script>
 
 </body>
