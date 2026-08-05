@@ -86,10 +86,95 @@
 <!-- ===== PAGE BANNER ===== -->
 <section class="page-banner bg-cover bg-center" style="background-image:url('https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1800&q=80')">
   <div class="container max-w-7xl mx-auto px-6 lg:px-10 text-center">
-    <p class="dim-line justify-center mb-5 text-white/80"><span class="dim-num">—</span> About The Studio</p>
-    <h1 class="font-display text-5xl md:text-6xl text-white">Two disciplines. One roof.</h1>
+    <p class="dim-line justify-center mb-5"><span class="dim-num">—</span> About The Studio</p>
+    <h1 class="font-display">Two disciplines.<br> <em>One roof.</em></h1>
   </div>
 </section>
+
+<!-- Font Styles for Page Banner -->
+<style>
+  /* Bold, dramatic serif + modern sans combo */
+  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;0,800;1,700;1,800&display=swap');
+
+  .page-banner * {
+    font-family: 'Oswald', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  .page-banner {
+    min-height: 50vh;
+    background-color: #1a1a1a;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .page-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(100deg, rgba(31,31,31,.82) 20%, rgba(31,31,31,.35) 100%);
+    z-index: 1;
+  }
+
+  .page-banner .container {
+    position: relative;
+    z-index: 2;
+  }
+
+  .page-banner .dim-line {
+    font-size: 0.9rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    font-weight: 300;
+    opacity: 0.9;
+    color: #ffffff;
+    font-family: 'Oswald', sans-serif;
+  }
+
+  .page-banner .dim-num {
+    color: #fbbf24;
+    margin-right: 0.5rem;
+    font-weight: 600;
+  }
+
+  /* Main heading – powerful Oswald + Playfair for elegance */
+  .page-banner .font-display {
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    color: #ffffff;
+    margin: 0;
+    font-size: 5rem;
+    text-shadow: 0 4px 30px rgba(0,0,0,0.4);
+  }
+
+  .page-banner .font-display em {
+    color: #fbbf24;
+    font-style: italic;
+    font-weight: 800;
+    font-family: 'Playfair Display', Georgia, serif;
+    text-shadow: 0 0 40px rgba(251, 191, 36, 0.2);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .page-banner .font-display {
+      font-size: 3.2rem;
+    }
+    .page-banner .dim-line {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .page-banner .font-display {
+      font-size: 2.5rem;
+    }
+  }
+</style>
 
 <!-- ===== COMPANY OVERVIEW ===== -->
 <section class="py-28 bg-white">
