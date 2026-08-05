@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us — Strata &amp; Stone</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { theme: { extend: {
+    colors: { primary:'#FFB900', secondary:'#E63946', accent:'#8B1E2D', darktext:'#1F1F1F', bodytext:'#555555', bordercol:'#EAEAEA', lightbg:'#F8F8F8' },
+    fontFamily: { display:['Playfair Display','serif'], body:['Poppins','sans-serif'] }
+  } } };
+</script>
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body class="font-body">
+<!-- <div id="preloader"><div class="loader-mark">S&amp;S<div class="loader-line"></div></div></div> -->
+
+<!-- ===== HEADER ===== -->
+<header id="site-header">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between">
+
+    <!-- Logo -->
+    <a href="index.html" class="flex items-center">
+      <img
+        src="images/logo.png"
+        alt="Strata & Stone Logo"
+        class="h-14 md:h-16 lg:h-18 w-auto object-contain"
+      >
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="hidden lg:flex items-center gap-10">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="projects.html" class="nav-link">Projects</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+
+    <!-- CTA Button -->
+    <div class="hidden lg:block">
+      <a href="contact.html" class="btn btn-primary">Get a Quote</a>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button id="menu-toggle" class="lg:hidden text-white text-2xl">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+  </div>
+</header>
+
+<!-- ===== MOBILE MENU ===== -->
+<div id="mobile-menu">
+  <button id="menu-close" class="absolute top-8 right-8 text-white text-3xl">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+
+  <div class="h-full flex flex-col items-center justify-center gap-8">
+
+    <!-- Mobile Logo -->
+    <a href="index.html" class="mb-6">
+      <img
+        src="images/logo.png"
+        alt="Strata & Stone Logo"
+        class="h-16 w-auto object-contain"
+      >
+    </a>
+
+    <a href="index.html" class="nav-link font-display text-3xl text-white lg:text-gray-800">Home</a>
+<a href="about.html" class="nav-link font-display text-3xl text-white lg:text-gray-800">About</a>
+<a href="services.html" class="nav-link font-display text-3xl text-white lg:text-gray-800">Services</a>
+<a href="projects.html" class="nav-link font-display text-3xl text-white lg:text-gray-800">Projects</a>
+<a href="contact.html" class="nav-link font-display text-3xl text-white lg:text-gray-800">Contact</a>
+
+
+  </div>
+</div>
+
+<!-- ===== PAGE BANNER ===== -->
+<section class="page-banner bg-cover bg-center" style="background-image:url('https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1800&q=80')">
+  <div class="container max-w-7xl mx-auto px-6 lg:px-10 text-center">
+    <p class="dim-line justify-center mb-5 text-white/80"><span class="dim-num">—</span> About The Studio</p>
+    <h1 class="font-display text-5xl md:text-6xl text-white">Two disciplines. One roof.</h1>
+  </div>
+</section>
+
+<!-- ===== COMPANY OVERVIEW ===== -->
+<section class="py-28 bg-white">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-16 items-center">
+    <div class="reveal-left dim-corner">
+      <img src="https://images.unsplash.com/photo-1600607687644-c7171b42498f?auto=format&fit=crop&w=1000&q=80" class="w-full h-[540px] object-cover rounded-sm" alt="Studio team reviewing plans">
+    </div>
+    <div class="reveal-up">
+      <p class="dim-line mb-5"><span class="dim-num">01</span> Company Overview</p>
+      <h2 class="font-display text-4xl md:text-5xl mb-6 leading-tight">Founded on-site, not in a showroom.</h2>
+      <p class="leading-8 mb-5">Strata &amp; Stone was founded in 2012 by a civil engineer and an interior designer
+        who kept running into the same problem: contractors and designers who never talked to each other, leaving
+        clients to manage the gap themselves.</p>
+      <p class="leading-8">Today we run both disciplines under one studio — structural teams and design teams
+        working from the same drawing set, the same budget, and the same deadline.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VISION / MISSION ===== -->
+<section class="py-28 bg-lightbg">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 grid md:grid-cols-2 gap-8 stagger-group">
+    <div class="stagger-item bg-white p-12 border border-bordercol rounded-sm dim-corner">
+      <i class="fa-solid fa-eye text-3xl text-secondary mb-6"></i>
+      <h3 class="font-display text-2xl mb-4">Our Vision</h3>
+      <p class="leading-8">To be the studio Pune trusts to carry a space from bare land to finished room, with
+        no compromise made between what stands up and what looks beautiful.</p>
+    </div>
+    <div class="stagger-item bg-white p-12 border border-bordercol rounded-sm dim-corner">
+      <i class="fa-solid fa-bullseye text-3xl text-secondary mb-6"></i>
+      <h3 class="font-display text-2xl mb-4">Our Mission</h3>
+      <p class="leading-8">To deliver every project on a transparent budget and timeline, built by people
+        who are accountable for both the structure and the space it becomes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EXPERIENCE ===== -->
+<section class="py-28 bg-white">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="text-center max-w-2xl mx-auto mb-16 section-fade">
+      <p class="dim-line justify-center mb-5"><span class="dim-num">02</span> Track Record</p>
+      <h2 class="font-display text-4xl md:text-5xl">Our Experience</h2>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-10 stagger-group text-center">
+      <div class="stagger-item card-counter"><p class="num"><span class="counter" data-count="14">0</span></p><p class="text-sm uppercase tracking-widest mt-2">Years Practising</p></div>
+      <div class="stagger-item card-counter"><p class="num"><span class="counter" data-count="240">0</span>+</p><p class="text-sm uppercase tracking-widest mt-2">Projects Completed</p></div>
+      <div class="stagger-item card-counter"><p class="num"><span class="counter" data-count="60">0</span>+</p><p class="text-sm uppercase tracking-widest mt-2">In-House Specialists</p></div>
+      <div class="stagger-item card-counter"><p class="num"><span class="counter" data-count="18">0</span></p><p class="text-sm uppercase tracking-widest mt-2">Cities Served</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DESIGN APPROACH ===== -->
+<section class="py-28 bg-lightbg">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-16 items-center">
+    <div class="reveal-up order-2 lg:order-1">
+      <p class="dim-line mb-5"><span class="dim-num">03</span> Our Design Approach</p>
+      <h2 class="font-display text-4xl md:text-5xl mb-6 leading-tight">Draw it, cost it, prove it.</h2>
+      <p class="leading-8 mb-8">Every project starts with a site read — structural and spatial — before a single
+        finish is chosen. That way the design we hand you is one the site can actually support, on a budget
+        you've already approved.</p>
+      <div class="space-y-6">
+        <div class="flex gap-5"><span class="font-display text-2xl text-primary">01</span><div><h4 class="font-semibold text-darktext mb-1">Site &amp; Structural Read</h4><p class="text-sm">Survey, soil analysis and load assessment inform the design brief.</p></div></div>
+        <div class="flex gap-5"><span class="font-display text-2xl text-primary">02</span><div><h4 class="font-semibold text-darktext mb-1">Concept &amp; Material Palette</h4><p class="text-sm">Mood, layout and material choices proposed against the approved budget.</p></div></div>
+        <div class="flex gap-5"><span class="font-display text-2xl text-primary">03</span><div><h4 class="font-semibold text-darktext mb-1">Build &amp; Refine On-Site</h4><p class="text-sm">Design adjusts in real time to how the space is actually being built.</p></div></div>
+      </div>
+    </div>
+    <div class="reveal-right order-1 lg:order-2 dim-corner">
+      <img src="https://images.unsplash.com/photo-1600166898405-da9535204843?auto=format&fit=crop&w=1000&q=80" class="w-full h-[540px] object-cover rounded-sm" alt="Design approach — sketching over material samples">
+    </div>
+  </div>
+</section>
+
+<!-- ===== CORE VALUES ===== -->
+<section class="py-28 bg-white">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="text-center max-w-2xl mx-auto mb-16 section-fade">
+      <p class="dim-line justify-center mb-5"><span class="dim-num">04</span> What Guides Us</p>
+      <h2 class="font-display text-4xl md:text-5xl">Core Values</h2>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 stagger-group">
+      <div class="stagger-item text-center p-8">
+        <div class="icon-wrap mx-auto mb-5"><i class="fa-solid fa-scale-balanced"></i></div>
+        <h3 class="font-display text-lg mb-3">Integrity</h3>
+        <p class="text-sm leading-7">We quote honestly and flag problems before they become expensive.</p>
+      </div>
+      <div class="stagger-item text-center p-8">
+        <div class="icon-wrap mx-auto mb-5"><i class="fa-solid fa-magnifying-glass"></i></div>
+        <h3 class="font-display text-lg mb-3">Precision</h3>
+        <p class="text-sm leading-7">Every measurement, joint and margin checked twice, not once.</p>
+      </div>
+      <div class="stagger-item text-center p-8">
+        <div class="icon-wrap mx-auto mb-5"><i class="fa-solid fa-people-group"></i></div>
+        <h3 class="font-display text-lg mb-3">Collaboration</h3>
+        <p class="text-sm leading-7">Engineers and designers share one table, not two separate offices.</p>
+      </div>
+      <div class="stagger-item text-center p-8">
+        <div class="icon-wrap mx-auto mb-5"><i class="fa-solid fa-leaf"></i></div>
+        <h3 class="font-display text-lg mb-3">Responsibility</h3>
+        <p class="text-sm leading-7">Material sourcing and site practice that we'd stand behind ourselves.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHY CHOOSE US ===== -->
+<section class="py-28 bg-lightbg">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-16 items-center">
+    <div class="reveal-left dim-corner">
+      <img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=1000&q=80" class="w-full h-[500px] object-cover rounded-sm" alt="Finished living space">
+    </div>
+    <div class="reveal-up">
+      <p class="dim-line mb-5"><span class="dim-num">05</span> Why Choose Us</p>
+      <h2 class="font-display text-4xl md:text-5xl mb-8 leading-tight">The build and the beauty, from the same team.</h2>
+      <ul class="space-y-5">
+        <li class="flex gap-4"><i class="fa-solid fa-check text-primary mt-1"></i><span>One contract covers structural work and interior design — no separate vendors to coordinate.</span></li>
+        <li class="flex gap-4"><i class="fa-solid fa-check text-primary mt-1"></i><span>Daily site supervision with weekly progress and cost reports.</span></li>
+        <li class="flex gap-4"><i class="fa-solid fa-check text-primary mt-1"></i><span>In-house quality inspection at every construction stage.</span></li>
+        <li class="flex gap-4"><i class="fa-solid fa-check text-primary mt-1"></i><span>Design decisions grounded in what the structure can actually support.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="relative py-28">
+  <div class="absolute inset-0 bg-cover bg-center" style="background-image:url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1800&q=80')"></div>
+  <div class="absolute inset-0" style="background:rgba(139,30,45,.88)"></div>
+  <div class="relative z-10 max-w-4xl mx-auto px-6 text-center section-fade">
+    <h2 class="font-display text-4xl md:text-5xl text-white mb-6">Ready to talk through your site?</h2>
+    <p class="text-white/80 text-lg mb-10 max-w-xl mx-auto">Bring your plot, plan, or renovation brief — we'll give you a straight answer.</p>
+    <a href="contact.html" class="btn btn-primary">Book a Consultation</a>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer style="background:#1F1F1F">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 py-20 grid md:grid-cols-4 gap-12">
+    <div>
+      <a href="index.html" class="font-display text-2xl text-white">YS Interiors</a>
+      <p class="mt-5 text-sm leading-7" style="color:#9a9a9a">A design-and-build studio pairing structural precision with elevated interiors — from foundation to final finish.</p>
+      <div class="flex gap-3 mt-6">
+        <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center text-white/80 hover:text-[#1F1F1F] hover:bg-[#FFB900] border border-white/15 transition"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center text-white/80 hover:text-[#1F1F1F] hover:bg-[#FFB900] border border-white/15 transition"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center text-white/80 hover:text-[#1F1F1F] hover:bg-[#FFB900] border border-white/15 transition"><i class="fa-brands fa-pinterest-p"></i></a>
+        <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center text-white/80 hover:text-[#1F1F1F] hover:bg-[#FFB900] border border-white/15 transition"><i class="fa-brands fa-linkedin-in"></i></a>
+      </div>
+    </div>
+    <div>
+      <h4 class="text-white font-display text-lg mb-5">Quick Links</h4>
+      <ul class="space-y-3 text-sm" style="color:#9a9a9a">
+        <li><a href="about.html" class="hover:text-[#FFB900] transition">About Us</a></li>
+        <li><a href="services.html" class="hover:text-[#FFB900] transition">Services</a></li>
+        <li><a href="projects.html" class="hover:text-[#FFB900] transition">Projects</a></li>
+        <li><a href="contact.html" class="hover:text-[#FFB900] transition">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="text-white font-display text-lg mb-5">Services</h4>
+      <ul class="space-y-3 text-sm" style="color:#9a9a9a">
+        <li><a href="services.html#pmc" class="hover:text-[#FFB900] transition">Execution &amp; PMC</a></li>
+        <li><a href="services.html#concrete" class="hover:text-[#FFB900] transition">Concrete Works</a></li>
+        <li><a href="services.html#residential-interior" class="hover:text-[#FFB900] transition">Residential Interiors</a></li>
+        <li><a href="services.html#commercial-interior" class="hover:text-[#FFB900] transition">Commercial Interiors</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="text-white font-display text-lg mb-5">Contact</h4>
+      <ul class="space-y-3 text-sm" style="color:#9a9a9a">
+        <li class="flex gap-3"><i class="fa-solid fa-location-dot mt-1 text-[#FFB900]"></i>Madhuvanti C-402, Nanded City, Pune - 411041</li>
+        <li class="flex gap-3"><i class="fa-solid fa-phone mt-1 text-[#FFB900]"></i>+91 9403598189</li>
+        <li class="flex gap-3"><i class="fa-solid fa-envelope mt-1 text-[#FFB900]"></i>Ysinteriors.pune@gmail.com</li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-white/10 py-6 text-center text-xs" style="color:#7d7d7d">© 2026 YS Interior Design-Build Studio. All rights reserved.</div>
+</footer>
+
+<a id="whatsapp-float" href="https://wa.me/919822045671" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
+<button id="back-to-top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i><svg width="52" height="52" viewBox="0 0 52 52"><circle cx="26" cy="26" r="23"></circle></svg></button>
+
+<script src="js/main.js"></script>
+<script src="js/animation.js"></script>
+</body>
+</html>
