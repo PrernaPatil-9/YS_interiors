@@ -160,6 +160,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 5;
   }
   .modal-close:hover {
     background: #f0f0f0;
@@ -198,23 +199,89 @@
     margin-bottom: 28px;
   }
 
-  .modal-gallery {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
+  /* ===== MODAL GALLERY CAROUSEL (compact, fixed-size thumbnails) ===== */
+  .modal-gallery-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
 
-  .modal-gallery img {
-    width: 100%;
+  .modal-gallery-viewport {
+    overflow: hidden;
+    flex: 1;
+    border-radius: 8px;
+  }
+
+  .modal-gallery-track {
+    display: flex;
+    gap: 16px;
+    transition: transform 0.4s ease;
+  }
+
+  .modal-gallery-track img {
+    flex: 0 0 calc((100% - 32px) / 3);
+    width: calc((100% - 32px) / 3);
     height: 200px;
     object-fit: cover;
     border-radius: 8px;
-    transition: transform 0.4s ease;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
-  .modal-gallery img:hover {
+  .modal-gallery-track img:hover {
     transform: scale(1.03);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+  }
+
+  .gallery-nav {
+    flex: 0 0 auto;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #EAEAEA;
+    background: #fff;
+    color: #8B1E2D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+  }
+
+  .gallery-nav:hover {
+    background: #8B1E2D;
+    color: #fff;
+    border-color: #8B1E2D;
+  }
+
+  .gallery-nav:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .modal-gallery-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 14px;
+  }
+
+  .modal-gallery-dots span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #EAEAEA;
+    transition: all 0.3s ease;
+  }
+
+  .modal-gallery-dots span.active-dot {
+    background: #8B1E2D;
+    width: 18px;
+    border-radius: 3px;
   }
 
   .modal-cta {
@@ -282,6 +349,89 @@
     border-radius: 10px;
   }
 
+  /* ===== FULLSCREEN LIGHTBOX ===== */
+  .fullscreen-lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10001;
+    background: rgba(0,0,0,0.95);
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    animation: modalFadeIn 0.3s ease;
+  }
+
+  .fullscreen-lightbox.active {
+    display: flex;
+  }
+
+  .fullscreen-lightbox img {
+    max-width: 90vw;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 6px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 22px;
+    right: 28px;
+    font-size: 1.8rem;
+    color: #fff;
+    background: rgba(255,255,255,0.1);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .lightbox-close:hover {
+    background: #8B1E2D;
+    transform: rotate(90deg);
+  }
+
+  .lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: #fff;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .lightbox-nav:hover {
+    background: #8B1E2D;
+  }
+  .lightbox-prev { left: 24px; }
+  .lightbox-next { right: 24px; }
+
+  .lightbox-counter {
+    position: absolute;
+    bottom: 26px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.75);
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+  }
+
   @media (max-width: 768px) {
     .modal-content {
       padding: 30px 22px 32px;
@@ -290,20 +440,29 @@
     .modal-content h2 {
       font-size: 1.6rem;
     }
-    .modal-gallery {
-      grid-template-columns: 1fr 1fr;
-    }
-    .modal-gallery img {
+    .modal-gallery-track img {
+      flex: 0 0 calc((100% - 16px) / 2);
+      width: calc((100% - 16px) / 2);
       height: 160px;
     }
+    .gallery-nav {
+      width: 34px;
+      height: 34px;
+    }
+    .lightbox-nav {
+      width: 44px;
+      height: 44px;
+      font-size: 1rem;
+    }
+    .lightbox-prev { left: 10px; }
+    .lightbox-next { right: 10px; }
   }
 
   @media (max-width: 480px) {
-    .modal-gallery {
-      grid-template-columns: 1fr;
-    }
-    .modal-gallery img {
-      height: 200px;
+    .modal-gallery-track img {
+      flex: 0 0 100%;
+      width: 100%;
+      height: 220px;
     }
     .modal-cta {
       flex-direction: column;
@@ -321,11 +480,19 @@
 <body class="font-body">
 
 <!-- ===== HEADER ===== -->
-<header id="site-header">
+<header id="site-header" class="relative overflow-visible">
   <div class="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between">
-    <a href="index.html" class="flex items-center">
-      <img src="/images/logo.PNG" alt="YS Interiors" class="h-14 md:h-16 lg:h-18 w-auto object-contain">
+
+    <!-- Logo -->
+    <a href="index.html" class="flex items-center -my-1.5 md:-my-2 lg:-my-3">
+      <img
+        src="/images/Logo-removebg-preview.png"
+        alt="YS Interiors"
+        class="h-16 md:h-20 lg:h-24 w-auto object-contain"
+      >
     </a>
+
+    <!-- Desktop Navigation -->
     <nav class="hidden lg:flex items-center gap-10">
       <a href="index.html" class="nav-link">Home</a>
       <a href="about.html" class="nav-link">About</a>
@@ -333,12 +500,20 @@
       <a href="projects.html" class="nav-link">Projects</a>
       <a href="contact.html" class="nav-link">Contact</a>
     </nav>
+
+    <!-- CTA Button -->
     <div class="hidden lg:block">
-      <a href="contact.html" class="btn btn-primary">Get a Quote</a>
+     <a href="contact.html" class="btn btn-dark">
+    Get a Quote
+</a>
+
     </div>
+
+    <!-- Mobile Menu Button -->
     <button id="menu-toggle" class="lg:hidden text-white text-2xl">
       <i class="fa-solid fa-bars"></i>
     </button>
+
   </div>
 </header>
 
@@ -347,15 +522,25 @@
   <button id="menu-close" class="absolute top-8 right-8 text-white text-3xl">
     <i class="fa-solid fa-xmark"></i>
   </button>
+
   <div class="h-full flex flex-col items-center justify-center gap-8">
+
+    <!-- Mobile Logo -->
     <a href="index.html" class="mb-6">
-      <img src="images/logo.png" alt="Strata & Stone Logo" class="h-16 w-auto object-contain">
+      <img
+        src="/images/Logo-removebg-preview.png"
+        alt="YS Interiors"
+        class="h-16 w-auto object-contain"
+      >
     </a>
+
     <a href="index.html" class="nav-link font-display text-3xl text-white lg:text-gray-800">Home</a>
-    <a href="about.html" class="nav-link font-display text-3xl text-white lg:text-gray-800">About</a>
-    <a href="services.html" class="nav-link font-display text-3xl text-white lg:text-gray-800">Services</a>
-    <a href="projects.html" class="nav-link font-display text-3xl text-white lg:text-gray-800">Projects</a>
-    <a href="contact.html" class="nav-link font-display text-3xl text-white lg:text-gray-800">Contact</a>
+<a href="about.html" class="nav-link font-display text-3xl text-white lg:text-gray-800">About</a>
+<a href="services.html" class="nav-link font-display text-3xl text-white lg:text-gray-800">Services</a>
+<a href="projects.html" class="nav-link font-display text-3xl text-white lg:text-gray-800">Projects</a>
+<a href="contact.html" class="nav-link font-display text-3xl text-white lg:text-gray-800">Contact</a>
+
+
   </div>
 </div>
 
@@ -466,103 +651,113 @@
 
       <!-- Project 1 -->
       <div class="project-item" data-category="residential">
-        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="Kavana Villa">
+        <img src="/images/Kharadi 1.jpeg" alt="Kavana Villa">
         <div class="project-overlay">
           <span class="badge">Residential</span>
-          <h3>Kavana Villa</h3>
-          <p>Koregaon Park, Pune — full villa interior fit-out.</p>
+          <h3>Villa</h3>
+          <p>Kharadi, Pune — full villa interior fit-out.</p>
           <a href="#" class="view-link" data-project="kavana">View Details <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
 
       <!-- Project 2 -->
       <div class="project-item" data-category="commercial">
-        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80" alt="Meridian Offices">
+        <img src="/images/Abhiruchi 1.jpeg" alt="Meridian Offices">
         <div class="project-overlay">
           <span class="badge">Commercial</span>
-          <h3>Meridian Offices</h3>
-          <p>Baner, Pune — 18,000 sq.ft corporate fit-out.</p>
+          <h3>Abhiruchi</h3>
+          <p>Sinhagad Road, Pune — corporate fit-out.</p>
           <a href="#" class="view-link" data-project="meridian">View Details <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
 
       <!-- Project 3 -->
-      <div class="project-item" data-category="civil">
-        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80" alt="Hillcrest RCC Frame">
+      <div class="project-item" data-category="residential">
+        <img src="/images/Ambegaon 1.jpeg" alt="Hillcrest RCC Frame">
         <div class="project-overlay">
-          <span class="badge">Civil Work</span>
-          <h3>Hillcrest RCC Frame</h3>
-          <p>Wagholi, Pune — structural frame for a 6-unit residence.</p>
+          <span class="badge">Residential</span>
+          <h3> </h3>
+          <p>Ambegaon, Pune.</p>
           <a href="#" class="view-link" data-project="hillcrest">View Details <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
 
       <!-- Project 4 -->
-      <div class="project-item" data-category="renovation">
-        <img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=800&q=80" alt="Ashford Restoration">
+      <div class="project-item" data-category="commercial">
+        <img src="/images/Chinchwad 1.jpeg" alt="Ashford Restoration">
         <div class="project-overlay">
-          <span class="badge">Renovation</span>
-          <h3>Ashford Restoration</h3>
-          <p>Camp, Pune — heritage facade restoration and interior upgrade.</p>
+          <span class="badge">Commercial</span>
+          <h3>Yashwant Classes</h3>
+          <p>Bijilinagar, Chinchwad.</p>
           <a href="#" class="view-link" data-project="ashford">View Details <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
 
       <!-- Project 5 -->
-      <div class="project-item" data-category="residential">
-        <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=800&q=80" alt="Birchwood Apartment">
+      <div class="project-item" data-category="commercial">
+        <img src="/images/Commercial Vimannagar 1.jpeg" alt="Birchwood Apartment">
         <div class="project-overlay">
-          <span class="badge">Residential</span>
-          <h3>Birchwood Apartment</h3>
-          <p>Kothrud, Pune — modular kitchen and living space redesign.</p>
+          <span class="badge">Commercial</span>
+          <h3>  </h3>
+          <p>Vimannagar, Pune.</p>
           <a href="#" class="view-link" data-project="birchwood">View Details <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
 
       <!-- Project 6 -->
-      <div class="project-item" data-category="commercial">
-        <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=800&q=80" alt="Terra Café">
+      <!-- <div class="project-item" data-category="commercial">
+        <img src="/images/Kharadi 1.jpeg" alt="Terra Café">
         <div class="project-overlay">
           <span class="badge">Commercial</span>
-          <h3>Terra Café</h3>
-          <p>FC Road, Pune — 2,200 sq.ft café interior and outdoor deck.</p>
+          <h3>  </h3>
+          <p>Kharadi, Pune.</p>
           <a href="#" class="view-link" data-project="terra">View Details <i class="fa-solid fa-arrow-right"></i></a>
         </div>
-      </div>
+      </div> -->
 
       <!-- Project 7 -->
       <div class="project-item" data-category="civil">
-        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80" alt="Solstice Foundation Works">
+        <img src="/images/Loni 1.jpeg" alt="Solstice Foundation Works">
         <div class="project-overlay">
-          <span class="badge">Civil Work</span>
-          <h3>Solstice Foundation Works</h3>
-          <p>Hinjewadi, Pune — excavation and foundation for a 4-storey building.</p>
+          <span class="badge">Residential</span>
+          <h3> </h3>
+          <p>Loni, Pune.</p>
           <a href="#" class="view-link" data-project="solstice">View Details <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
 
       <!-- Project 8 -->
-      <div class="project-item" data-category="renovation">
-        <img src="https://images.unsplash.com/photo-1600166898405-da9535204843?auto=format&fit=crop&w=800&q=80" alt="Laurel House Upgrade">
+      <div class="project-item" data-category="residential">
+        <img src="/images/Pashan 1.jpeg" alt="Laurel House Upgrade">
         <div class="project-overlay">
-          <span class="badge">Renovation</span>
-          <h3>Laurel House Upgrade</h3>
-          <p>Aundh, Pune — structural upgrade and full interior renovation.</p>
+          <span class="badge">Residential</span>
+          <h3>  </h3>
+          <p>Pashan, Pune.</p>
           <a href="#" class="view-link" data-project="laurel">View Details <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
 
       <!-- Project 9 -->
       <div class="project-item" data-category="residential">
-        <img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=800&q=80" alt="Ivory Bungalow">
+        <img src="/images/R1.jpeg" alt="Ivory Bungalow">
         <div class="project-overlay">
           <span class="badge">Residential</span>
-          <h3>Ivory Bungalow</h3>
-          <p>NIBM, Pune — bedroom and living room interior design.</p>
+          <h3>  </h3>
+          <p>Rahatani, Pune.</p>
           <a href="#" class="view-link" data-project="ivory">View Details <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
 
+      <!-- Project 10 -->
+      <div class="project-item" data-category="residential">
+        <img src="/images/Vimannagar 1.jpeg" alt="Ivory Bungalow">
+        <div class="project-overlay">
+          <span class="badge">Residential</span>
+          <h3>  </h3>
+          <p>Rahatani, Pune.</p>
+          <a href="#" class="view-link" data-project="ivory">View Details <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -578,12 +773,19 @@
     <h2 id="modalTitle">Kavana Villa</h2>
     <p class="modal-location" id="modalLocation">📍 Koregaon Park, Pune</p>
     <p class="modal-description" id="modalDescription">A complete interior fit-out for a luxury villa featuring modern aesthetics with warm, earthy tones. The project included custom furniture, lighting design, and premium material selection.</p>
-    
-    <div class="modal-gallery" id="modalGallery">
-      <img src="https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=800&q=80" alt="Project Image 1">
-      <img src="https://images.unsplash.com/photo-1616137466211-f939a420be84?auto=format&fit=crop&w=800&q=80" alt="Project Image 2">
-      <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80" alt="Project Image 3">
+
+    <div class="modal-gallery-wrapper">
+      <button class="gallery-nav gallery-prev" id="galleryPrev" aria-label="Previous images">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <div class="modal-gallery-viewport">
+        <div class="modal-gallery-track" id="modalGalleryTrack"></div>
+      </div>
+      <button class="gallery-nav gallery-next" id="galleryNext" aria-label="Next images">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
     </div>
+    <div class="modal-gallery-dots" id="modalGalleryDots"></div>
 
     <div class="modal-cta">
       <a href="contact.html" class="btn-modal">
@@ -596,25 +798,47 @@
   </div>
 </div>
 
+<!-- ===== FULLSCREEN LIGHTBOX ===== -->
+<div id="fullscreenLightbox" class="fullscreen-lightbox">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close fullscreen">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous image">
+    <i class="fa-solid fa-chevron-left"></i>
+  </button>
+  <img id="lightboxImage" src="" alt="">
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next image">
+    <i class="fa-solid fa-chevron-right"></i>
+  </button>
+  <div class="lightbox-counter" id="lightboxCounter">1 / 10</div>
+</div>
+
 <!-- ===== REDESIGNED FOOTER WITH ICONS ===== -->
 <footer style="background:#1F1F1F">
   <div class="max-w-7xl mx-auto px-6 lg:px-10 py-20 grid md:grid-cols-4 gap-12">
     
-    <!-- Column 1: Brand & Social -->
-    <div>
-      <a href="index.html" class="font-display text-2xl text-white flex items-center gap-2">
-        <i class="fa-solid fa-crown text-[#FFB900] text-xl"></i>
-        YS Interiors
-      </a>
-      <p class="mt-5 text-sm leading-7" style="color:#9a9a9a">A design-and-build studio pairing structural precision with elevated interiors — from foundation to final finish.</p>
-      <div class="flex gap-3 mt-6">
-        <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center text-white/80 hover:text-[#1F1F1F] hover:bg-[#FFB900] border border-white/15 transition"><i class="fa-brands fa-instagram"></i></a>
-        <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center text-white/80 hover:text-[#1F1F1F] hover:bg-[#FFB900] border border-white/15 transition"><i class="fa-brands fa-facebook-f"></i></a>
-        <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center text-white/80 hover:text-[#1F1F1F] hover:bg-[#FFB900] border border-white/15 transition"><i class="fa-brands fa-pinterest-p"></i></a>
-        <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center text-white/80 hover:text-[#1F1F1F] hover:bg-[#FFB900] border border-white/15 transition"><i class="fa-brands fa-linkedin-in"></i></a>
-        <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center text-white/80 hover:text-[#1F1F1F] hover:bg-[#FFB900] border border-white/15 transition"><i class="fa-brands fa-youtube"></i></a>
-      </div>
-    </div>
+   <!-- Column 1: Brand & Social -->
+<div>
+  <a href="index.html" class="flex items-center">
+   <img
+  src="/images/Logo-removebg-preview.png"
+  alt="YS Interiors Logo"
+  class="h-[100px] w-auto"
+>
+  </a>
+
+  <p class="mt-5 text-sm leading-7" style="color:#9a9a9a">
+    A design-and-build studio pairing structural precision with elevated interiors — from foundation to final finish.
+  </p>
+
+  <div class="flex gap-3 mt-6">
+    <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center text-white/80 hover:text-[#1F1F1F] hover:bg-[#FFB900] border border-white/15 transition"><i class="fa-brands fa-instagram"></i></a>
+    <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center text-white/80 hover:text-[#1F1F1F] hover:bg-[#FFB900] border border-white/15 transition"><i class="fa-brands fa-facebook-f"></i></a>
+    <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center text-white/80 hover:text-[#1F1F1F] hover:bg-[#FFB900] border border-white/15 transition"><i class="fa-brands fa-pinterest-p"></i></a>
+    <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center text-white/80 hover:text-[#1F1F1F] hover:bg-[#FFB900] border border-white/15 transition"><i class="fa-brands fa-linkedin-in"></i></a>
+    <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center text-white/80 hover:text-[#1F1F1F] hover:bg-[#FFB900] border border-white/15 transition"><i class="fa-brands fa-youtube"></i></a>
+  </div>
+</div>
 
     <!-- Column 2: Quick Links with Icons -->
     <div>
@@ -671,7 +895,7 @@
         </li>
         <li class="flex gap-3 items-center">
           <i class="fa-solid fa-whatsapp text-[#FFB900] text-base"></i>
-          <a href="https://wa.me/919403598189" class="hover:text-[#FFB900] transition">Chat on WhatsApp</a>
+          <a href="https://wa.me/917499824230" class="hover:text-[#FFB900] transition">Chat on WhatsApp</a>
         </li>
       </ul>
     </div>
@@ -700,12 +924,13 @@
   </div>
 </footer>
 
-<a id="whatsapp-float" href="https://wa.me/919822045671" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
+<a id="whatsapp-float" href="https://wa.me/917499824230" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
 <button id="back-to-top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i><svg width="52" height="52" viewBox="0 0 52 52"><circle cx="26" cy="26" r="23"></circle></svg></button>
 
 <script src="js/main.js"></script>
 <script src="js/animation.js"></script>
 <script src="js/projects.js"></script>
+
 <script>
   // Filter functionality for projects
   document.addEventListener('DOMContentLoaded', function() {
@@ -734,113 +959,249 @@
       item.style.display = 'block';
     });
 
-    // ===== MODAL FUNCTIONALITY =====
-    const modal = document.getElementById('projectModal');
-    const modalClose = document.getElementById('modalClose');
-    const viewLinks = document.querySelectorAll('.view-link');
-
-    // Project data
+    // =====================================================================
+    // PROJECT DATA — edit this to add/remove/replace images per project.
+    //
+    // Each project has an "images" array. To add a photo, just add a new
+    // line inside that project's array (a trailing comma on every line
+    // except the last makes this easy). To remove one, delete its line.
+    // The carousel, dot indicators, and fullscreen lightbox all adjust
+    // automatically to however many images you list — it does NOT need
+    // to be exactly 10.
+    //
+    // You can use:
+    //   1) A web image URL, e.g. 'https://images.unsplash.com/photo-xxxx'
+    //   2) A local file path, e.g. 'images/projects/kavana/1.jpg'
+    //      (put the actual photo files in that folder alongside this page)
+    // =====================================================================
     const projectData = {
       kavana: {
         badge: 'Residential',
-        title: 'Kavana Villa',
-        location: '📍 Koregaon Park, Pune',
-        description: 'A complete interior fit-out for a luxury villa featuring modern aesthetics with warm, earthy tones. The project included custom furniture, lighting design, and premium material selection.',
+        title: ' Villa',
+        location: '📍 Kharadi, Pune',
+        description: '',
         images: [
-          'https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=800&q=80',
-          'https://images.unsplash.com/photo-1616137466211-f939a420be84?auto=format&fit=crop&w=800&q=80',
-          'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80'
+          '/images/Kharadi 1.jpeg',
+          '/images/Kharadi 2.jpeg',
+          '/images/Kharadi 3.jpeg',
+          '/images/Kharadi 4.jpeg',
+          '/images/Kharadi 5.jpeg',
+          '/images/Kharadi 6.jpeg'
+          // add more lines here, e.g. 'images/projects/kavana/4.jpg',
         ]
       },
       meridian: {
         badge: 'Commercial',
-        title: 'Meridian Offices',
-        location: '📍 Baner, Pune',
-        description: 'A 18,000 sq.ft corporate fit-out featuring open-plan workspaces, collaborative zones, and executive offices with premium finishes and modern technology integration.',
+        title: '',
+        location: '📍 Abhiruchi, Pune',
+        description: '',
         images: [
-          'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80',
-          'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=800&q=80',
-          'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=800&q=80'
+          '/images/Abhiruchi 1.jpeg',
+          '/images/Abhiruchi 2.jpeg',
+          '/images/Abhiruchi 3.jpeg'
         ]
       },
       hillcrest: {
-        badge: 'Civil Work',
-        title: 'Hillcrest RCC Frame',
-        location: '📍 Wagholi, Pune',
-        description: 'Structural RCC frame construction for a 6-unit residential building, including foundation, columns, beams, and slab work with high-quality concrete and reinforcement.',
+        badge: 'Residential',
+        title: '',
+        location: '📍 Ambegaon, Pune',
+        description: '',
         images: [
-          'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80',
-          'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80',
-          'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=800&q=80'
+          '/images/Ambegaon 1.jpeg',
+          '/images/Ambegaon 2.jpeg',
+          '/images/Ambegaon 3.jpeg',
+          '/images/Ambegaon 4.jpeg'
         ]
       },
       ashford: {
-        badge: 'Renovation',
-        title: 'Ashford Restoration',
-        location: '📍 Camp, Pune',
-        description: 'Heritage facade restoration and complete interior upgrade, preserving historical elements while introducing modern amenities and contemporary design sensibilities.',
+        badge: 'Residential',
+        title: '',
+        location: '📍 Bijilinagar,Pune',
+        description: '',
         images: [
-          'https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=800&q=80',
-          'https://images.unsplash.com/photo-1600166898405-da9535204843?auto=format&fit=crop&w=800&q=80',
-          'https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=800&q=80'
+          '/images/Chinchwad 1.jpeg',
+          '/images/Chinchwad 2.jpeg',
+          '/images/Chinchwad 3.jpeg',
+          '/images/Chinchwad 4.jpeg',
+          '/images/Chinchwad 5.jpeg',
+          '/images/Chinchwad 6.jpeg'
         ]
       },
       birchwood: {
         badge: 'Residential',
-        title: 'Birchwood Apartment',
-        location: '📍 Kothrud, Pune',
-        description: 'Modular kitchen and living space redesign featuring smart storage solutions, premium finishes, and an open-plan layout that maximizes natural light and space.',
+        title: '',
+        location: '📍 Vimannagar, Pune',
+        description: '',
         images: [
-          'https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=800&q=80',
-          'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80',
-          'https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=800&q=80'
+          '/images/Commercial Vimannagar 1.jpeg',
+          '/images/Commercial Vimannagar 2.jpeg',
+          '/images/Commercial Vimannagar 3.jpeg',
+          '/images/Commercial Vimannagar 4.jpeg',
+          '/images/Commercial Vimannagar 5.jpeg',
+          '/images/Commercial Vimannagar 6.jpeg'
         ]
       },
-      terra: {
-        badge: 'Commercial',
-        title: 'Terra Café',
-        location: '📍 FC Road, Pune',
-        description: '2,200 sq.ft café interior and outdoor deck design featuring a biophilic theme, custom furniture, and a warm, inviting atmosphere perfect for the urban coffee culture.',
-        images: [
-          'https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=800&q=80',
-          'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80',
-          'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80'
-        ]
-      },
+      // terra: {
+      //   badge: 'Commercial',
+      //   title: '',
+      //   location: '📍 Kharadi, Pune',
+      //   description: '',
+      //   images: [
+      //     '/images/Kharadi 1.jpeg',
+      //     '/images/Kharadi 2.jpeg',
+      //     '/images/Kharadi 3.jpeg',
+      //     '/images/Kharadi 4.jpeg',
+      //     '/images/Kharadi 5.jpeg',
+      //     '/images/Kharadi 6.jpeg'
+      //   ]
+      // },
       solstice: {
-        badge: 'Civil Work',
-        title: 'Solstice Foundation Works',
-        location: '📍 Hinjewadi, Pune',
-        description: 'Comprehensive excavation and foundation work for a 4-storey commercial building, including soil testing, deep foundation design, and high-strength concrete work.',
+        badge: 'Residential',
+        title: '',
+        location: '📍 Loni, Pune',
+        description: '',
         images: [
-          'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80',
-          'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80',
-          'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=800&q=80'
+          '/images/Loni 1.jpeg',
+          '/images/Loni 2.jpeg',
+          '/images/Loni 3.jpeg',
+          '/images/Loni 4.jpeg',
+          '/images/Loni 5.jpeg',
         ]
       },
       laurel: {
-        badge: 'Renovation',
-        title: 'Laurel House Upgrade',
-        location: '📍 Aundh, Pune',
-        description: 'Structural upgrade and full interior renovation including RCC strengthening, modern finishes, and complete redesign of living spaces to meet contemporary standards.',
+        badge: 'Commercial',
+        title: '',
+        location: '📍 Pashan, Pune',
+        description: '',
         images: [
-          'https://images.unsplash.com/photo-1600166898405-da9535204843?auto=format&fit=crop&w=800&q=80',
-          'https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=800&q=80',
-          'https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=800&q=80'
+          '/images/Pashan 1.jpeg',
+          '/images/Pashan 2.jpeg',
+          '/images/Pashan 3.jpeg',
+          '/images/Pashan 4.jpeg',
+          '/images/Pashan 5.jpeg',
+          '/images/Pashan 6.jpeg',
         ]
       },
       ivory: {
         badge: 'Residential',
-        title: 'Ivory Bungalow',
-        location: '📍 NIBM, Pune',
+        title: '',
+        location: '📍 Rahatani, Pune',
         description: 'Bedroom and living room interior design featuring elegant finishes, custom furniture, and a sophisticated color palette that creates a timeless, luxurious atmosphere.',
         images: [
-          'https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=800&q=80',
-          'https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=800&q=80',
-          'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80'
+          '/images/R1.jpeg',
+          '/images/R2.jpeg',
+          '/images/R3.jpeg',
+          '/images/R4.jpeg',
+          '/images/R5.jpeg',
+          '/images/R6.jpeg',
+          '/images/R7.jpeg',
+          '/images/R8.jpeg',
+          '/images/R9.jpeg',
         ]
-      }
+      },
+      laurel: {
+        badge: 'Commercial',
+        title: '',
+        location: '📍 Vimannagar, Pune',
+        description: '',
+        images: [
+          '/images/Vimannagar 1.jpeg',
+          '/images/Vimannagar 2.jpeg',
+          '/images/Vimannagar 3.jpeg',
+          '/images/Vimannagar 4.jpeg',
+          '/images/Vimannagar 5.jpeg',
+          '/images/Vimannagar 6.jpeg',
+        ]
+      },
     };
+
+    // ===== MODAL ELEMENTS =====
+    const modal = document.getElementById('projectModal');
+    const modalClose = document.getElementById('modalClose');
+    const viewLinks = document.querySelectorAll('.view-link');
+    const galleryTrack = document.getElementById('modalGalleryTrack');
+    const galleryDots = document.getElementById('modalGalleryDots');
+    const galleryPrevBtn = document.getElementById('galleryPrev');
+    const galleryNextBtn = document.getElementById('galleryNext');
+
+    // ===== LIGHTBOX ELEMENTS =====
+    const lightbox = document.getElementById('fullscreenLightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+    const lightboxClose = document.getElementById('lightboxClose');
+    const lightboxPrevBtn = document.getElementById('lightboxPrev');
+    const lightboxNextBtn = document.getElementById('lightboxNext');
+    const lightboxCounter = document.getElementById('lightboxCounter');
+
+    let currentImages = [];
+    let visibleCount = 3;          // how many thumbnails show at once in the carousel
+    let carouselIndex = 0;         // index of the left-most visible thumbnail
+    let lightboxIndex = 0;         // index of the currently fullscreen image
+
+    function getVisibleCount() {
+      if (window.innerWidth <= 480) return 1;
+      if (window.innerWidth <= 768) return 2;
+      return 3;
+    }
+
+    // Build the compact carousel thumbnails for the current project
+    function renderGallery() {
+      galleryTrack.innerHTML = '';
+      currentImages.forEach((src, idx) => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = document.getElementById('modalTitle').textContent + ' photo ' + (idx + 1);
+        img.loading = 'lazy';
+        img.dataset.index = idx;
+        img.addEventListener('click', () => openLightbox(idx));
+        galleryTrack.appendChild(img);
+      });
+
+      // Build dots (one per "page" of the carousel)
+      galleryDots.innerHTML = '';
+      const maxIndex = Math.max(0, currentImages.length - visibleCount);
+      for (let i = 0; i <= maxIndex; i++) {
+        const dot = document.createElement('span');
+        if (i === 0) dot.classList.add('active-dot');
+        galleryDots.appendChild(dot);
+      }
+
+      updateCarousel();
+    }
+
+    function updateCarousel() {
+      visibleCount = getVisibleCount();
+      const maxIndex = Math.max(0, currentImages.length - visibleCount);
+      carouselIndex = Math.min(carouselIndex, maxIndex);
+
+      const thumb = galleryTrack.children[0];
+      if (thumb) {
+        const gap = 16;
+        const step = thumb.getBoundingClientRect().width + gap;
+        galleryTrack.style.transform = `translateX(-${carouselIndex * step}px)`;
+      }
+
+      galleryPrevBtn.disabled = carouselIndex <= 0;
+      galleryNextBtn.disabled = carouselIndex >= maxIndex;
+
+      // Sync dots
+      const dots = galleryDots.querySelectorAll('span');
+      dots.forEach((d, i) => d.classList.toggle('active-dot', i === carouselIndex));
+    }
+
+    galleryPrevBtn.addEventListener('click', () => {
+      carouselIndex = Math.max(0, carouselIndex - 1);
+      updateCarousel();
+    });
+
+    galleryNextBtn.addEventListener('click', () => {
+      const maxIndex = Math.max(0, currentImages.length - visibleCount);
+      carouselIndex = Math.min(maxIndex, carouselIndex + 1);
+      updateCarousel();
+    });
+
+    window.addEventListener('resize', () => {
+      if (modal.classList.contains('active')) updateCarousel();
+    });
 
     // Open modal
     viewLinks.forEach(link => {
@@ -848,23 +1209,17 @@
         e.preventDefault();
         const projectKey = this.getAttribute('data-project');
         const data = projectData[projectKey];
-        
+
         if (data) {
           document.getElementById('modalBadge').textContent = data.badge;
           document.getElementById('modalTitle').textContent = data.title;
           document.getElementById('modalLocation').textContent = data.location;
           document.getElementById('modalDescription').textContent = data.description;
-          
-          const gallery = document.getElementById('modalGallery');
-          gallery.innerHTML = '';
-          data.images.forEach(src => {
-            const img = document.createElement('img');
-            img.src = src;
-            img.alt = data.title;
-            img.loading = 'lazy';
-            gallery.appendChild(img);
-          });
-          
+
+          currentImages = data.images;
+          carouselIndex = 0;
+          renderGallery();
+
           modal.classList.add('active');
           document.body.style.overflow = 'hidden';
         }
@@ -881,8 +1236,50 @@
     modal.addEventListener('click', function(e) {
       if (e.target === this) closeModal();
     });
+
+    // ===== FULLSCREEN LIGHTBOX LOGIC =====
+    function openLightbox(index) {
+      lightboxIndex = index;
+      showLightboxImage();
+      lightbox.classList.add('active');
+    }
+
+    function showLightboxImage() {
+      lightboxImage.src = currentImages[lightboxIndex];
+      lightboxImage.alt = document.getElementById('modalTitle').textContent + ' — fullscreen photo ' + (lightboxIndex + 1);
+      lightboxCounter.textContent = (lightboxIndex + 1) + ' / ' + currentImages.length;
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+    }
+
+    function showNextImage() {
+      lightboxIndex = (lightboxIndex + 1) % currentImages.length;
+      showLightboxImage();
+    }
+
+    function showPrevImage() {
+      lightboxIndex = (lightboxIndex - 1 + currentImages.length) % currentImages.length;
+      showLightboxImage();
+    }
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxNextBtn.addEventListener('click', showNextImage);
+    lightboxPrevBtn.addEventListener('click', showPrevImage);
+    lightbox.addEventListener('click', function(e) {
+      if (e.target === this) closeLightbox();
+    });
+
+    // Keyboard controls: Escape closes whichever is open, arrows navigate the lightbox
     document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') closeModal();
+      if (lightbox.classList.contains('active')) {
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowRight') showNextImage();
+        if (e.key === 'ArrowLeft') showPrevImage();
+      } else if (modal.classList.contains('active')) {
+        if (e.key === 'Escape') closeModal();
+      }
     });
   });
 </script>
