@@ -101,11 +101,8 @@
     color: #92400e;
   }
 
-
-
-/* brond section  */
-
-   @keyframes scrollBrands {
+  /* Brand section animations */
+    @keyframes scrollBrands {
         0% {
             transform: translateX(0);
         }
@@ -127,18 +124,18 @@
         animation-play-state: paused;
     }
 
-    /* Grayscale filter for brand logos */
+    /* Remove grayscale filter – logos stay in full color */
     .brand-track img {
-        filter: grayscale(100%);
-        opacity: 0.6;
-        transition: all 0.3s ease;
+        /* No grayscale, no opacity reduction. Full color always. */
+        filter: none;
+        opacity: 0.9; /* Slight transparency for a softer look, remove if you want 100% opacity */
+        transition: opacity 0.3s ease;
     }
 
     .brand-track img:hover {
-        filter: grayscale(0%);
+        filter: none;
         opacity: 1;
     }
-
 
 </style>
 
@@ -491,59 +488,96 @@
             <div class="brand-track flex gap-16 items-center animate-scroll" style="width: max-content;">
                 <!-- Brand 1 -->
                 <div class="flex-shrink-0">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1280px-Google_2015_logo.svg.png" 
-                         alt="Google" class="h-12 w-auto grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+                    <img src="/images/c_logo (1).jpeg" 
+                         alt="Google" class="h-20 w-auto transition-all duration-300 opacity-90 hover:opacity-100">
                 </div>
                 <!-- Brand 2 -->
                 <div class="flex-shrink-0">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/1280px-Microsoft_logo.svg.png" 
-                         alt="Microsoft" class="h-12 w-auto grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+                    <img src="/images/c_logo (2).jpeg" 
+                         alt="Microsoft" class="h-20 w-auto transition-all duration-300 opacity-90 hover:opacity-100">
                 </div>
                 <!-- Brand 3 -->
                 <div class="flex-shrink-0">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1280px-Amazon_logo.svg.png" 
-                         alt="Amazon" class="h-12 w-auto grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+                    <img src="/images/c_logo (3).jpeg" 
+                         alt="Amazon" class="h-20 w-auto transition-all duration-300 opacity-90 hover:opacity-100">
                 </div>
                 <!-- Brand 4 -->
                 <div class="flex-shrink-0">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1280px-Apple_logo_black.svg.png" 
-                         alt="Apple" class="h-12 w-auto grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+                    <img src="/images/c_logo (4).jpeg" 
+                         alt="Apple" class="h-20 w-auto transition-all duration-300 opacity-90 hover:opacity-100">
                 </div>
                 <!-- Brand 5 -->
                 <div class="flex-shrink-0">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/1280px-Netflix_2015_logo.svg.png" 
-                         alt="Netflix" class="h-12 w-auto grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+                    <img src="/images/c_logo (1).jpeg" 
+                         alt="Netflix" class="h-20 w-auto transition-all duration-300 opacity-90 hover:opacity-100">
                 </div>
                 <!-- Brand 6 -->
                 <div class="flex-shrink-0">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Notion_app_logo.png/1280px-Notion_app_logo.png" 
-                         alt="Notion" class="h-12 w-auto grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+                    <img src="/images/c_logo (2).jpeg" 
+                         alt="Notion" class="h-20 w-auto transition-all duration-300 opacity-90 hover:opacity-100">
                 </div>
                 <!-- Brand 7 -->
                 <div class="flex-shrink-0">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Shopify_logo_2018.svg/1280px-Shopify_logo_2018.svg.png" 
-                         alt="Shopify" class="h-12 w-auto grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+                    <img src="/images/c_logo (3).jpeg" 
+                         alt="Shopify" class="h-20 w-auto transition-all duration-300 opacity-90 hover:opacity-100">
+                </div>
+
+                <!-- Duplicate set for seamless loop -->
+                <!-- Brand 1 -->
+                <div class="flex-shrink-0">
+                    <img src="/images/c_logo (1).jpeg" 
+                         alt="Google" class="h-20 w-auto transition-all duration-300 opacity-90 hover:opacity-100">
+                </div>
+                <!-- Brand 2 -->
+                <div class="flex-shrink-0">
+                    <img src="/images/c_logo (2).jpeg" 
+                         alt="Microsoft" class="h-20 w-auto transition-all duration-300 opacity-90 hover:opacity-100">
+                </div>
+                <!-- Brand 3 -->
+                <div class="flex-shrink-0">
+                    <img src="/images/c_logo (3).jpeg" 
+                         alt="Amazon" class="h-20 w-auto transition-all duration-300 opacity-90 hover:opacity-100">
+                </div>
+                <!-- Brand 4 -->
+                <div class="flex-shrink-0">
+                    <img src="/images/c_logo (4).jpeg" 
+                         alt="Apple" class="h-20 w-auto transition-all duration-300 opacity-90 hover:opacity-100">
+                </div>
+                <!-- Brand 5 -->
+                <div class="flex-shrink-0">
+                    <img src="/images/c_logo (1).jpeg" 
+                         alt="Netflix" class="h-20 w-auto transition-all duration-300 opacity-90 hover:opacity-100">
+                </div>
+                <!-- Brand 6 -->
+                <div class="flex-shrink-0">
+                    <img src="/images/c_logo (2).jpeg" 
+                         alt="Notion" class="h-20 w-auto transition-all duration-300 opacity-90 hover:opacity-100">
+                </div>
+                <!-- Brand 7 -->
+                <div class="flex-shrink-0">
+                    <img src="/images/c_logo (3).jpeg" 
+                         alt="Shopify" class="h-20 w-auto transition-all duration-300 opacity-90 hover:opacity-100">
                 </div>
                 <!-- Brand 8 (duplicate for seamless loop) -->
                 <div class="flex-shrink-0">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1280px-Google_2015_logo.svg.png" 
-                         alt="Google" class="h-12 w-auto grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+                    <img src="/images/c_logo (4).jpeg" 
+                         alt="Google" class="h-20 w-auto transition-all duration-300 opacity-90 hover:opacity-100">
                 </div>
                 <div class="flex-shrink-0">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/1280px-Microsoft_logo.svg.png" 
-                         alt="Microsoft" class="h-12 w-auto grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+                    <img src="/images/c_logo (1).jpeg" 
+                         alt="Microsoft" class="h-20 w-auto transition-all duration-300 opacity-90 hover:opacity-100">
                 </div>
                 <div class="flex-shrink-0">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1280px-Amazon_logo.svg.png" 
-                         alt="Amazon" class="h-12 w-auto grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+                    <img src="/images/c_logo (2).jpeg" 
+                         alt="Amazon" class="h-20 w-auto transition-all duration-300 opacity-90 hover:opacity-100">
                 </div>
                 <div class="flex-shrink-0">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1280px-Apple_logo_black.svg.png" 
-                         alt="Apple" class="h-12 w-auto grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+                    <img src="/images/c_logo (3).jpeg" 
+                         alt="Apple" class="h-20 w-auto transition-all duration-300 opacity-90 hover:opacity-100">
                 </div>
                 <div class="flex-shrink-0">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/1280px-Netflix_2015_logo.svg.png" 
-                         alt="Netflix" class="h-12 w-auto grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+                    <img src="/images/c_logo (4).jpeg" 
+                         alt="Netflix" class="h-20 w-auto transition-all duration-300 opacity-90 hover:opacity-100">
                 </div>
             </div>
         </div>
@@ -561,7 +595,7 @@
       <div class="absolute top-0 right-0 w-[82%] h-[440px] overflow-hidden rounded-[35px] shadow-2xl">
 
         <img 
-          src="https://images.unsplash.com/photo-1618219944342-824e40a13285?auto=format&fit=crop&w=1000&q=80"
+          src="/images/Kharadi 1.jpeg"
           class="w-full h-full object-cover"
           alt="Studio designed living room"
         >
@@ -588,7 +622,7 @@
       <div class="absolute bottom-0 left-0 w-[55%] h-[280px] rounded-[25px] overflow-hidden shadow-2xl border-[6px] border-white">
 
         <img
-          src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=700&q=80"
+          src="/images/home (3).jpeg"
           class="w-full h-full object-cover"
           alt="Interior detail"
         >
@@ -1553,7 +1587,7 @@
     <div class="stagger-item card-contact text-center">
       <i class="fa-solid fa-phone text-3xl text-secondary mb-5"></i>
       <h3 class="font-display text-lg mb-2">Call Us</h3>
-      <p class="text-sm">+91 9403598189</p>
+      <p class="text-sm">+91 7499824230</p>
     </div>
     <div class="stagger-item card-contact text-center">
       <i class="fa-solid fa-envelope text-3xl text-secondary mb-5"></i>
