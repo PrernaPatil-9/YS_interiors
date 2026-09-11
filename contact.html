@@ -211,11 +211,13 @@
     <div class="reveal-left">
       <p class="dim-line mb-5"><span class="dim-num">01</span> Send An Enquiry</p>
       <h2 class="font-display text-4xl mb-8">Tell us about your project</h2>
+
       <form id="contact-form" class="space-y-8">
         <div class="grid md:grid-cols-2 gap-8">
           <input id="c-name" type="text" placeholder="Full Name" class="form-input" required>
           <input id="c-email" type="email" placeholder="Email Address" class="form-input" required>
         </div>
+
         <div class="grid md:grid-cols-2 gap-8">
           <input id="c-phone" type="tel" placeholder="Phone Number" class="form-input">
           <select id="c-service" class="form-input">
@@ -226,26 +228,28 @@
             <option>Restoration &amp; Renovation</option>
           </select>
         </div>
-        
-        <!-- NEW: Area Size & Budget Fields (Simple Version) -->
+
+        <!-- Area Size & Budget Fields -->
         <div class="grid md:grid-cols-2 gap-8">
           <input id="c-area" type="number" placeholder="Area Size (sq. ft.)" class="form-input" min="0">
           <select id="c-budget" class="form-input">
             <option value="">Budget Range (₹)</option>
-            <option value="below-5lakh">Below ₹5 Lakh</option>
-            <option value="5-10lakh">₹5 Lakh - ₹10 Lakh</option>
-            <option value="10-20lakh">₹10 Lakh - ₹20 Lakh</option>
-            <option value="20-50lakh">₹20 Lakh - ₹50 Lakh</option>
-            <option value="50lakh-1cr">₹50 Lakh - ₹1 Crore</option>
-            <option value="above-1cr">Above ₹1 Crore</option>
+            <option value="Below ₹5 Lakh">Below ₹5 Lakh</option>
+            <option value="₹5 Lakh - ₹10 Lakh">₹5 Lakh - ₹10 Lakh</option>
+            <option value="₹10 Lakh - ₹20 Lakh">₹10 Lakh - ₹20 Lakh</option>
+            <option value="₹20 Lakh - ₹50 Lakh">₹20 Lakh - ₹50 Lakh</option>
+            <option value="₹50 Lakh - ₹1 Crore">₹50 Lakh - ₹1 Crore</option>
+            <option value="Above ₹1 Crore">Above ₹1 Crore</option>
           </select>
         </div>
-        
+
         <textarea id="c-message" rows="5" placeholder="Tell us about your space, budget, and timeline" class="form-input" required></textarea>
+
         <button type="submit" class="btn btn-primary">Send Message <i class="fa-solid fa-paper-plane"></i></button>
         <p id="form-msg" class="mt-4 text-sm"></p>
       </form>
     </div>
+
     <div class="reveal-right dim-corner">
       <iframe
         src="https://www.google.com/maps?q=Pune,Maharashtra,India&output=embed"
@@ -257,6 +261,63 @@
     </div>
   </div>
 </section>
+
+<!-- ===== WHATSAPP FORM SCRIPT ===== -->
+<script>
+  (function () {
+    const WHATSAPP_NUMBER = "919075030505"; // country code + number, no + or spaces
+    const form = document.getElementById("contact-form");
+    const msgEl = document.getElementById("form-msg");
+
+    if (!form) return;
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const name    = document.getElementById("c-name").value.trim();
+      const email   = document.getElementById("c-email").value.trim();
+      const phone   = document.getElementById("c-phone").value.trim();
+      const service = document.getElementById("c-service").value;
+      const area    = document.getElementById("c-area").value.trim();
+      const budget  = document.getElementById("c-budget").value;
+      const message = document.getElementById("c-message").value.trim();
+
+      // Basic validation
+      if (!name || !email || !message) {
+        msgEl.textContent = "Please fill in your name, email and message.";
+        msgEl.style.color = "#dc2626";
+        return;
+      }
+
+      // Build the WhatsApp message
+      const lines = [
+        "*New Enquiry — YS Interiors*",
+        "",
+        "*Name:* " + name,
+        "*Email:* " + email,
+        phone   ? "*Phone:* " + phone     : null,
+        service ? "*Service:* " + service : null,
+        area    ? "*Area:* " + area + " sq. ft." : null,
+        budget  ? "*Budget:* " + budget   : null,
+        "",
+        "*Message:*",
+        message
+      ].filter(Boolean);
+
+      const text = encodeURIComponent(lines.join("\n"));
+      const url  = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + text;
+
+      // Open WhatsApp
+      window.open(url, "_blank");
+
+      msgEl.textContent = "Opening WhatsApp… please send the message to complete your enquiry.";
+      msgEl.style.color = "#16a34a";
+
+      // Optional: reset the form after a short delay
+      setTimeout(() => form.reset(), 800);
+    });
+  })();
+</script>
 
 <!-- Footer will be loaded from components/footer.html -->
 <div id="footer-placeholder"></div>
